@@ -1,11 +1,13 @@
-import {Guitar} from '../../types/guitar';
+import {MAX_STARS_COUNT} from '../../constants';
+import {createIndexList} from '../../utils';
+import {Product} from '../../types/product';
 
 type ProductCardProps = {
-  guitar: Guitar;
+  product: Product;
 }
 
-function ProductCard({guitar}: ProductCardProps): JSX.Element {
-  const {name, previewImg, price} = guitar;
+function ProductCard({product}: ProductCardProps): JSX.Element {
+  const {name, previewImg, rating, price, comments} = product;
 
   return (
     <div className="product-card">
@@ -18,22 +20,12 @@ function ProductCard({guitar}: ProductCardProps): JSX.Element {
       <div className="product-card__info">
         <div className="rate product-card__rate" aria-hidden="true">
           <span className='visually-hidden'>Рейтинг:</span>
-          <svg width="12" height="11" aria-hidden="true">
-            <use xlinkHref="#icon-full-star" />
-          </svg>
-          <svg width="12" height="11" aria-hidden="true">
-            <use xlinkHref="#icon-full-star" />
-          </svg>
-          <svg width="12" height="11" aria-hidden="true">
-            <use xlinkHref="#icon-full-star" />
-          </svg>
-          <svg width="12" height="11" aria-hidden="true">
-            <use xlinkHref="#icon-full-star" />
-          </svg>
-          <svg width="12" height="11" aria-hidden="true">
-            <use xlinkHref="#icon-star" />
-          </svg>
-          <span className="rate__count">9</span>
+          {createIndexList(MAX_STARS_COUNT).map((index) => (
+            <svg key={`${index}-star`} width="12" height="11" aria-hidden="true">
+              <use xlinkHref={`#${(Math.round(rating) > index) ? 'icon-full-star' : 'icon-star'}`} />
+            </svg>
+          ))}
+          {comments && <span className="rate__count">{comments?.length}</span>}
           <span className="rate__message" />
         </div>
         <p className="product-card__title">
@@ -41,12 +33,12 @@ function ProductCard({guitar}: ProductCardProps): JSX.Element {
         </p>
         <p className="product-card__price">
           <span className="visually-hidden">Цена:</span>
-          {`${price} ₽`}
+          {`${price.toLocaleString('ru-RU')} ₽`}
         </p>
       </div>
       <div className="product-card__buttons">
-        <a className="button button--mini" href="#">Подробнее</a>
-        <a className="button button--red button--mini button--add-to-cart" href="#">Купить</a>
+        <button className="button button--mini">Подробнее</button>
+        <button className="button button--red button--mini button--add-to-cart">Купить</button>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ type LogoProps = {
 
 function Logo({className}: LogoProps): JSX.Element {
   const location = useLocation();
-  const isMainScreenRoute = location.pathname === AppRoute.CatalogScreen;
+  const isMainScreenRoute = location.pathname === AppRoute.MainScreen;
 
   const handleLinkClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     if (isMainScreenRoute) {
@@ -19,8 +19,9 @@ function Logo({className}: LogoProps): JSX.Element {
   return (
     <Link
       onClick={handleLinkClick}
-      className={`${className}__logo logo ${isMainScreenRoute && 'link--current'}`}
-      to={AppRoute.CatalogScreen}
+      className={`${className}__logo logo`}
+      style={{pointerEvents: `${isMainScreenRoute ? 'none' : 'auto'}`}}
+      to={AppRoute.MainScreen}
     >
       <img
         className="logo__img"

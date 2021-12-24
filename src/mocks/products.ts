@@ -1,7 +1,7 @@
 import {datatype, image, lorem} from 'faker';
-import {Guitar} from '../types/guitar';
+import {Product} from '../types/product';
 
-const createMockGuitar = (): Guitar => ({
+const createMockProduct = (): Product => ({
   id: datatype.number(),
   name: lorem.words(3),
   vendorCode: datatype.uuid(),
@@ -13,6 +13,6 @@ const createMockGuitar = (): Guitar => ({
   price: datatype.number({min: 1000, max: 100000}),
 });
 
-const createMockGuitars = (): Guitar[] => new Array(datatype.number(10)).fill(null).map(() => createMockGuitar());
+const createMockProducts = (): Product[] => new Array(datatype.number(10)).fill(null).map(() => createMockProduct());
 
-export {createMockGuitars};
+export {createMockProducts};
