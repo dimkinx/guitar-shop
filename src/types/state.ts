@@ -1,5 +1,6 @@
 import {StatusType} from '../enums';
 import {Product} from './product';
+import {Namespace} from '../constants';
 
 type ProductsState = {
   products: Product[],
@@ -7,13 +8,13 @@ type ProductsState = {
 };
 
 type SearchState = {
-  products: Product[],
+  foundProducts: Product[],
   status: StatusType,
 };
 
 type State = {
-  products: ProductsState,
-  search: SearchState,
+  [Namespace.Products]: ProductsState,
+  [Namespace.Search]: SearchState,
 };
 
 export type {ProductsState, SearchState, State};

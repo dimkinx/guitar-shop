@@ -1,24 +1,24 @@
 import {toast} from 'react-toastify';
 import {ThunkActionResult} from '../../types/thunk-action';
-import {setProducts, setProductsStatus} from './products-actions';
+import {setFoundProducts, setFoundProductsStatus} from './search-actions';
 import {StatusType} from '../../enums';
 import {Product} from '../../types/product';
 import {APIRoute, ErrorMessage} from '../../constants';
 import {QueryParams} from '../../types/query-params';
 
-const fetchProducts = (queryParams?: QueryParams): ThunkActionResult => (
+const fetchFoundProducts = (queryParams?: QueryParams): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
-    dispatch(setProductsStatus(StatusType.Loading));
+    dispatch(setFoundProductsStatus(StatusType.Loading));
     await api.get<Product[]>(APIRoute.Products, {params: queryParams})
       .then(({data}) => {
-        dispatch(setProducts(data));
-        dispatch(setProductsStatus(StatusType.Success));
+        dispatch(setFoundProducts(data));
+        dispatch(setFoundProductsStatus(StatusType.Success));
       })
       .catch(() => {
-        dispatch(setProductsStatus(StatusType.Failure));
-        toast.error(ErrorMessage.FailedToLoadProducts);
+        dispatch(setFoundProductsStatus(StatusType.Failure));
+        toast.error(ErrorMessage.FailedToLoadSearchRequest);
       });
   }
 );
 
-export {fetchProducts};
+export {fetchFoundProducts};

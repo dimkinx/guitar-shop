@@ -44,9 +44,12 @@ function CatalogScreen(): JSX.Element {
             <CatalogFilter />
             <CatalogSort />
             <div className="cards catalog__cards">
-              {productsStatus === StatusType.Loading && createIndexList(NUM_PRODUCTS_PER_PAGE).map((index) => (
-                <ProductCardSkeleton key={index} />
-              ))}
+              {(productsStatus === StatusType.Loading || productsStatus === StatusType.Failure) && (
+                createIndexList(NUM_PRODUCTS_PER_PAGE)
+                  .map((index) => (
+                    <ProductCardSkeleton key={index} />
+                  ))
+              )}
               {productsStatus === StatusType.Success && products.map((product) => (
                 <ProductCard
                   key={product.id}

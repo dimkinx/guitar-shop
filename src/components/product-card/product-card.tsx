@@ -1,5 +1,6 @@
-import {MAX_STARS_COUNT} from '../../constants';
+import { Link } from 'react-router-dom';
 import {createIndexList} from '../../utils';
+import {MAX_STARS_COUNT} from '../../constants';
 import {Product} from '../../types/product';
 
 type ProductCardProps = {
@@ -37,8 +38,8 @@ function ProductCard({product}: ProductCardProps): JSX.Element {
         </p>
       </div>
       <div className="product-card__buttons">
-        <button className="button button--mini">Подробнее</button>
-        <button className="button button--red button--mini button--add-to-cart">Купить</button>
+        <Link to="#" className="button button--mini">Подробнее</Link>
+        <Link to="#" className="button button--red button--mini button--add-to-cart">Купить</Link>
       </div>
     </div>
   );

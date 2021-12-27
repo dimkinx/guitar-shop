@@ -1,10 +1,11 @@
 import {combineReducers} from '@reduxjs/toolkit';
 import {productsReducer} from './products/products-reducer';
+import {searchReducer} from './search/search-reducer';
 import {Namespace} from '../constants';
 
 const rootReducer = combineReducers({
   [Namespace.Products]: productsReducer,
-  // search: searchReducer,
+  [Namespace.Search]: searchReducer,
 });
 
 export {rootReducer};

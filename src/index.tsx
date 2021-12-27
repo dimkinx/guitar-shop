@@ -5,8 +5,11 @@ import {Provider} from 'react-redux';
 import {configureStore} from '@reduxjs/toolkit';
 import {createBrowserHistory} from 'history';
 import {rootReducer} from './store/root-reducer';
-import App from './components/app/app';
 import {createAPI} from './services/api';
+import App from './components/app/app';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastParam} from './constants';
 
 const api = createAPI();
 
@@ -30,6 +33,10 @@ ReactDOM.render(
         <App />
       </BrowserRouter>
     </Provider>
+    <ToastContainer
+      theme={ToastParam.Theme}
+      position={ToastParam.Position}
+    />
   </React.StrictMode>,
   document.getElementById('root'),
 );

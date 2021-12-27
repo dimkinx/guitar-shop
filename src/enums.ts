@@ -8,9 +8,8 @@ const enum StatusType {
 const enum ActionType {
   SetProducts = 'products/setProducts',
   SetProductsStatus = 'products/setProductsStatus',
-  SetAllProducts = 'search/setAllProducts',
-  SetAllProductsStatus = 'search/setAllProductsStatus',
-  ResetAllProducts = 'search/resetAllProducts',
+  SetFoundProducts = 'search/setFoundProducts',
+  SetFoundProductsStatus = 'search/setFoundProductsStatus',
 }
 
 export {StatusType, ActionType};
