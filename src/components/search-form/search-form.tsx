@@ -1,19 +1,21 @@
+import {FormEvent, KeyboardEvent, useEffect, useRef, useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import React, {FormEvent, KeyboardEvent, useEffect, useRef, useState} from 'react';
-import {DEBOUNCE_DELAY, KeyAttributeValue, QueryParam} from '../../constants';
-import {StatusType} from '../../enums';
+import {useDebounce} from 'use-debounce';
 import {getFoundProducts, getFoundProductsStatus} from '../../store/search/search-selectors';
 import {fetchFoundProducts} from '../../store/search/search-api-actions';
 import {setFoundProducts, setFoundProductsStatus} from '../../store/search/search-actions';
-import {useDebounce} from 'use-debounce';
-import {useHistory} from 'react-router-dom';
+import {DEBOUNCE_DELAY, KeyAttributeValue, QueryParam, QueryParamPrefix} from '../../constants';
+import {StatusType} from '../../enums';
 
 function SearchForm(): JSX.Element {
-  const [searchValue, setSearchValue] = useState('');
-  const [debouncedValue] = useDebounce(searchValue, DEBOUNCE_DELAY);
   const [isSelectListOpen, setIsSelectListOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [searchValue, setSearchValue] = useState('');
+
+  const [debouncedSearchValue] = useDebounce(searchValue, DEBOUNCE_DELAY);
   const selectElements = useRef<Record<number, HTMLLIElement>>({});
+
   const foundProducts = useSelector(getFoundProducts);
   const foundProductsStatus = useSelector(getFoundProductsStatus);
 
@@ -31,10 +33,9 @@ function SearchForm(): JSX.Element {
   };
 
   const handleFormBlur = () => {
-    setHighlightedIndex(-1);
-
     timer = setTimeout(() => {
       setIsSelectListOpen(false);
+      setHighlightedIndex(-1);
     });
   };
 
@@ -76,14 +77,18 @@ function SearchForm(): JSX.Element {
     setHighlightedIndex(-1);
   };
 
+  const handleSelectElementMouseEnter = (index: number) => () => {
+    setHighlightedIndex(index);
+  };
+
   const handleSelectElementClick = (id: number) => () => {
     history.push(`#${id}`);
   };
 
   useEffect(() => {
-    if (debouncedValue) {
+    if (debouncedSearchValue) {
       dispatch(fetchFoundProducts({
-        ['name'.concat(QueryParam.Like)]: debouncedValue,
+        [QueryParamPrefix.Name.concat(QueryParam.Like)]: debouncedSearchValue,
       }));
     }
 
@@ -91,7 +96,7 @@ function SearchForm(): JSX.Element {
       dispatch(setFoundProducts([]));
       dispatch(setFoundProductsStatus(StatusType.Idle));
     };
-  }, [dispatch, debouncedValue]);
+  }, [dispatch, debouncedSearchValue]);
 
   return (
     <div
@@ -103,6 +108,9 @@ function SearchForm(): JSX.Element {
       <form
         onSubmit={handleFormSubmit}
         className="form-search__form"
+        style={foundProducts.length <= 0 && foundProductsStatus === StatusType.Success
+          ? {borderColor:'#c90606'}
+          : undefined}
       >
         <button
           className="form-search__submit"
@@ -137,7 +145,7 @@ function SearchForm(): JSX.Element {
           />
         )}
       </form>
-      {(isSelectListOpen && foundProducts.length > 0) && (
+      {isSelectListOpen && foundProducts.length > 0 && (
         <ul
           className="form-search__select-list"
           style={{zIndex: '1'}}
@@ -146,10 +154,13 @@ function SearchForm(): JSX.Element {
           {foundProducts.map((foundProduct, index) => (
             <li
               key={foundProduct.id}
+              onMouseEnter={handleSelectElementMouseEnter(index)}
               onClick={handleSelectElementClick(foundProduct.id)}
               ref={(node: HTMLLIElement) => (selectElements.current[index] = node)}
-              style={highlightedIndex === index ? {color:'#545454'} : undefined}
               className="form-search__select-item"
+              style={highlightedIndex === index
+                ? {color:'#545454'}
+                : undefined}
             >{foundProduct.name}
             </li>
           ))}
