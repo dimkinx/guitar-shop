@@ -12,4 +12,14 @@ const enum ActionType {
   SetFoundProductsStatus = 'search/setFoundProductsStatus',
 }
 
-export {StatusType, ActionType};
+const enum SortType {
+  Price = 'price',
+  Rating = 'rating',
+}
+
+const enum OrderType {
+  Ascending = 'asc',
+  Descending = 'desc',
+}
+
+export {StatusType, ActionType, SortType, OrderType};
