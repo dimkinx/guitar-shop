@@ -1,9 +1,10 @@
-import {useEffect, useState} from 'react';
+import {MouseEvent, useEffect, useState} from 'react';
 import {SortType, OrderType, StatusType} from '../../enums';
 import {fetchProducts} from '../../store/products/products-api-actions';
 import {Namespace, NUM_PRODUCTS_PER_PAGE, QueryParam} from '../../constants';
 import {setProductsStatus} from '../../store/products/products-actions';
 import {useDispatch} from 'react-redux';
+import {addClassModifier} from '../../utils';
 
 function CatalogSort(): JSX.Element {
   const [sortType, setSortType] = useState('');
@@ -11,37 +12,17 @@ function CatalogSort(): JSX.Element {
 
   const dispatch = useDispatch();
 
-  const handlePriceButtonClick = () => {
-    if (sortType !== SortType.Price) {
-      setSortType(SortType.Price);
-    }
+  const handleSortButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
+    setSortType(evt.currentTarget.dataset.sort as SortType);
+
     if (!orderType) {
       setOrderType(OrderType.Ascending);
     }
   };
 
-  const handleRatingButtonClick = () => {
-    if (sortType !== SortType.Rating) {
-      setSortType(SortType.Rating);
-    }
-    if (!orderType) {
-      setOrderType(OrderType.Ascending);
-    }
-  };
+  const handleOrderButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
+    setOrderType(evt.currentTarget.dataset.order as OrderType);
 
-  const handleAscendingButtonClick = () => {
-    if (orderType !== OrderType.Ascending) {
-      setOrderType(OrderType.Ascending);
-    }
-    if (!sortType) {
-      setSortType(SortType.Price);
-    }
-  };
-
-  const handleDescendingButtonClick = () => {
-    if (orderType !== OrderType.Descending) {
-      setOrderType(OrderType.Descending);
-    }
     if (!sortType) {
       setSortType(SortType.Price);
     }
@@ -68,32 +49,36 @@ function CatalogSort(): JSX.Element {
       <h2 className="catalog-sort__title">Сортировать:</h2>
       <div className="catalog-sort__type">
         <button
-          onClick={handlePriceButtonClick}
-          className={`catalog-sort__type-button ${sortType === SortType.Price ? 'catalog-sort__type-button--active' : ''}`}
+          onClick={handleSortButtonClick}
+          className={addClassModifier(sortType === SortType.Price, 'catalog-sort__type-button')}
           aria-label="по цене"
           tabIndex={sortType === SortType.Price ? -1 : undefined}
+          data-sort={SortType.Price}
         >по цене
         </button>
         <button
-          onClick={handleRatingButtonClick}
-          className={`catalog-sort__type-button ${sortType === SortType.Rating ? 'catalog-sort__type-button--active' : ''}`}
+          onClick={handleSortButtonClick}
+          className={addClassModifier(sortType === SortType.Rating, 'catalog-sort__type-button')}
           aria-label="по популярности"
           tabIndex={sortType === SortType.Rating ? -1 : undefined}
+          data-sort={SortType.Rating}
         >по популярности
         </button>
       </div>
       <div className="catalog-sort__order">
         <button
-          onClick={handleAscendingButtonClick}
-          className={`catalog-sort__order-button catalog-sort__order-button--up ${orderType === OrderType.Ascending ? 'catalog-sort__order-button--active' : ''}`}
+          onClick={handleOrderButtonClick}
+          className={`${addClassModifier(orderType === OrderType.Ascending, 'catalog-sort__order-button')} catalog-sort__order-button--up`}
           aria-label="По возрастанию"
           tabIndex={orderType === OrderType.Ascending ? -1 : undefined}
+          data-order={OrderType.Ascending}
         />
         <button
-          onClick={handleDescendingButtonClick}
-          className={`catalog-sort__order-button catalog-sort__order-button--down ${orderType === OrderType.Descending ? 'catalog-sort__order-button--active' : ''}`}
+          onClick={handleOrderButtonClick}
+          className={`${addClassModifier(orderType === OrderType.Descending, 'catalog-sort__order-button')} catalog-sort__order-button--down`}
           aria-label="По убыванию"
           tabIndex={orderType === OrderType.Descending ? -1 : undefined}
+          data-order={OrderType.Descending}
         />
       </div>
     </div>
