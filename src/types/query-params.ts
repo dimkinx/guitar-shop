@@ -1,6 +1,6 @@
 type QueryParams = {
-  '_sort'?: string;
-  '_order'?: string;
+  '_sort'?: string | null;
+  '_order'?: string | null;
   '_start'?: number;
   '_end'?: number;
   '_limit'?: number;

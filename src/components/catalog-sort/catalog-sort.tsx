@@ -1,48 +1,31 @@
-import {MouseEvent, useEffect, useState} from 'react';
-import {SortType, OrderType, StatusType} from '../../enums';
-import {fetchProducts} from '../../store/products/products-api-actions';
-import {Namespace, NUM_PRODUCTS_PER_PAGE, QueryParam} from '../../constants';
-import {setProductsStatus} from '../../store/products/products-actions';
-import {useDispatch} from 'react-redux';
+import {MouseEvent} from 'react';
+import {SortType, OrderType} from '../../enums';
+import {useDispatch, useSelector} from 'react-redux';
 import {addClassModifier} from '../../utils';
+import {setOrderType, setSortType} from '../../store/sort/sort-actions';
+import {getOrderType, getSortType} from '../../store/sort/sort-selectors';
 
 function CatalogSort(): JSX.Element {
-  const [sortType, setSortType] = useState('');
-  const [orderType, setOrderType] = useState('');
+  const sortType = useSelector(getSortType);
+  const orderType = useSelector(getOrderType);
 
   const dispatch = useDispatch();
 
   const handleSortButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
-    setSortType(evt.currentTarget.dataset.sort as SortType);
+    dispatch(setSortType(evt.currentTarget.dataset.sort as SortType));
 
     if (!orderType) {
-      setOrderType(OrderType.Ascending);
+      dispatch(setOrderType(OrderType.Ascending));
     }
   };
 
   const handleOrderButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
-    setOrderType(evt.currentTarget.dataset.order as OrderType);
+    dispatch(setOrderType(evt.currentTarget.dataset.order as OrderType));
 
     if (!sortType) {
-      setSortType(SortType.Price);
+      dispatch(setSortType(SortType.Price));
     }
   };
-
-  useEffect(() => {
-    if (sortType && orderType) {
-      dispatch(fetchProducts({
-        [QueryParam.Sort]: sortType,
-        [QueryParam.Order]: orderType,
-        [QueryParam.Embed]: Namespace.Comments,
-        [QueryParam.Start]: 0,
-        [QueryParam.Limit]: NUM_PRODUCTS_PER_PAGE,
-      }));
-    }
-
-    return () => {
-      dispatch(setProductsStatus(StatusType.Idle));
-    };
-  }, [dispatch, orderType, sortType]);
 
   return (
     <div className="catalog-sort">
