@@ -5,7 +5,7 @@ import {useDebounce} from 'use-debounce';
 import {getFoundProducts, getFoundProductsStatus} from '../../store/search/search-selectors';
 import {fetchFoundProducts} from '../../store/search/search-api-actions';
 import {setFoundProducts, setFoundProductsStatus} from '../../store/search/search-actions';
-import {DEBOUNCE_DELAY, KeyAttributeValue, QueryParam, QueryParamPrefix} from '../../constants';
+import {DEBOUNCE_DELAY, KeyAttributeValue, SearchParamPostfix, SearchParamKey} from '../../constants';
 import {StatusType} from '../../enums';
 
 function SearchForm(): JSX.Element {
@@ -88,7 +88,7 @@ function SearchForm(): JSX.Element {
   useEffect(() => {
     if (debouncedSearchValue) {
       dispatch(fetchFoundProducts({
-        [QueryParamPrefix.Name.concat(QueryParam.Like)]: debouncedSearchValue,
+        [SearchParamKey.Name.concat(SearchParamPostfix.Like)]: debouncedSearchValue,
       }));
     }
 

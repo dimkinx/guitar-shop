@@ -1,3 +1,4 @@
+const APP_LOCALE = 'ru-RU';
 const MAX_STARS_COUNT = 5;
 const NUM_PRODUCTS_PER_PAGE = 9;
 const BACKEND_BASE_URL = 'https://accelerator-guitar-shop-api-v1.glitch.me';
@@ -13,7 +14,14 @@ const AppRoute = {
   CatalogScreen: '/catalog',
 } as const;
 
-const QueryParam = {
+const SearchParamKey = {
+  Name: 'name',
+  Price: 'price',
+  Type: 'type',
+  StringCount: 'stringCount',
+} as const;
+
+const SearchParamPostfix = {
   Sort: '_sort',
   Order: '_order',
   Start: '_start',
@@ -25,14 +33,12 @@ const QueryParam = {
   Embed: '_embed',
 } as const;
 
-const QueryParamPrefix = {
-  Name: 'name',
-} as const;
-
 const Namespace = {
   Products: 'products',
   Comments: 'comments',
   Search: 'search',
+  Sort: 'sort',
+  Filter: 'filter',
 } as const;
 
 const ToastParam = {
@@ -43,6 +49,7 @@ const ToastParam = {
 const ErrorMessage = {
   FailedToLoadProducts: 'Не удалось загрузить запрашиваемые товары',
   FailedToLoadSearchRequest: 'Не удалось загрузить поисковый запрос',
+  FailedToLoadPriceRangeRequest: 'Не удалось загрузить диапазон цен для фильтра',
 } as const;
 
 const KeyAttributeValue = {
@@ -52,6 +59,7 @@ const KeyAttributeValue = {
 } as const;
 
 export {
+  APP_LOCALE,
   MAX_STARS_COUNT,
   NUM_PRODUCTS_PER_PAGE,
   BACKEND_BASE_URL,
@@ -59,8 +67,8 @@ export {
   DEBOUNCE_DELAY,
   APIRoute,
   AppRoute,
-  QueryParam,
-  QueryParamPrefix,
+  SearchParamKey,
+  SearchParamPostfix,
   Namespace,
   ToastParam,
   ErrorMessage,

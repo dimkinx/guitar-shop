@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import {createIndexList} from '../../utils';
-import {MAX_STARS_COUNT} from '../../constants';
+import {APP_LOCALE, MAX_STARS_COUNT} from '../../constants';
 import {Product} from '../../types/product';
 
 type ProductCardProps = {
@@ -34,7 +34,7 @@ function ProductCard({product}: ProductCardProps): JSX.Element {
         </p>
         <p className="product-card__price">
           <span className="visually-hidden">Цена:</span>
-          {`${price.toLocaleString('ru-RU')} ₽`}
+          {`${price.toLocaleString(APP_LOCALE)} ₽`}
         </p>
       </div>
       <div className="product-card__buttons">
