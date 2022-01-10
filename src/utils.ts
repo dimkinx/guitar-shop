@@ -4,4 +4,13 @@ const addClassModifier = (predicate: boolean, className: string, modifier = 'act
   ? `${className} ${className}--${modifier}`
   : className;
 
-export {createIndexList, addClassModifier};
+const mergeSearchParams = (firstSearchParams: URLSearchParams, secondSearchParams: URLSearchParams): URLSearchParams => {
+  const result = new URLSearchParams('');
+
+  firstSearchParams.forEach((value, key) => result.append(key, value));
+  secondSearchParams.forEach((value, key) => result.append(key, value));
+
+  return result;
+};
+
+export {createIndexList, addClassModifier, mergeSearchParams};

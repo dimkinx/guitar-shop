@@ -27,4 +27,17 @@ const enum OrderType {
   Descending = 'desc',
 }
 
-export {StatusType, ActionType, SortType, OrderType};
+const enum GuitarType {
+  Acoustic = 'acoustic',
+  Electric = 'electric',
+  Ukulele = 'ukulele',
+}
+
+const enum StringCountType {
+  Four = '4',
+  Six = '6',
+  Seven = '7',
+  Twelve = '12',
+}
+
+export {StatusType, ActionType, SortType, OrderType, GuitarType, StringCountType};
