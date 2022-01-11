@@ -1,17 +1,20 @@
-import {createIndexList} from '../../utils';
-import {NUM_PRODUCTS_PER_PAGE, SearchParamPostfix} from '../../constants';
-import {ReactComponent as ProductCardSkeleton} from '../../assets/skeleton-card.svg';
-import ProductCard from '../product-card/product-card';
+import {useEffect} from 'react';
+import {useLocation, useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProducts, isProductsFailure, isProductsLoading, isProductsSuccess} from '../../store/products/products-selectors';
 import {getOrderType, getSortType} from '../../store/sort/sort-selectors';
-import {useEffect} from 'react';
 import {fetchProducts} from '../../store/products/products-api-actions';
-import {useLocation} from 'react-router-dom';
+import ProductCard from '../product-card/product-card';
+import {ReactComponent as ProductCardSkeleton} from '../../assets/skeleton-card.svg';
+import {createIndexList} from '../../utils';
+import {NUM_PRODUCTS_PER_PAGE, SearchParamPostfix} from '../../constants';
 
 function CatalogCards(): JSX.Element {
-  const dispatch = useDispatch();
+  const {pageId} = useParams<{pageId: string}>();
+  const firstPageIndex = pageId ? (Number(pageId) - 1) * NUM_PRODUCTS_PER_PAGE : 0;
+
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const products = useSelector(getProducts);
   const isLoading = useSelector(isProductsLoading);
@@ -23,11 +26,13 @@ function CatalogCards(): JSX.Element {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
 
+    searchParams.append(SearchParamPostfix.Start, firstPageIndex.toString());
+    searchParams.append(SearchParamPostfix.Limit, NUM_PRODUCTS_PER_PAGE.toString());
     sortType && searchParams.append(SearchParamPostfix.Sort, sortType);
     orderType && searchParams.append(SearchParamPostfix.Order, orderType);
 
     dispatch(fetchProducts(searchParams));
-  }, [dispatch, location.search, orderType, sortType]);
+  }, [dispatch, firstPageIndex, location.search, orderType, sortType]);
 
   return (
     <div className="cards catalog__cards">

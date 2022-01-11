@@ -11,6 +11,15 @@ const setProducts = createAction(
   }),
 );
 
+const setProductsTotalCount = createAction(
+  ActionType.SetProductsTotalCount,
+  (totalCount: number) => ({
+    payload: {
+      totalCount,
+    },
+  }),
+);
+
 const setProductsStatus = createAction(
   ActionType.SetProductsStatus,
   (status: StatusType) => ({
@@ -20,4 +29,4 @@ const setProductsStatus = createAction(
   }),
 );
 
-export {setProducts, setProductsStatus};
+export {setProducts, setProductsTotalCount, setProductsStatus};

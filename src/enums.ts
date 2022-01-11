@@ -7,6 +7,7 @@ const enum StatusType {
 
 const enum ActionType {
   SetProducts = 'products/setProducts',
+  SetProductsTotalCount = 'products/setProductsTotalCount',
   SetProductsStatus = 'products/setProductsStatus',
   SetFoundProducts = 'search/setFoundProducts',
   SetFoundProductsStatus = 'search/setFoundProductsStatus',

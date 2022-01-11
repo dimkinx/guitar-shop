@@ -4,6 +4,7 @@ import {Namespace} from '../constants';
 
 type ProductsState = {
   products: Product[],
+  totalCount: number,
   status: StatusType,
 };
 

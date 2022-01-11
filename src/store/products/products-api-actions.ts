@@ -1,9 +1,9 @@
 import {toast} from 'react-toastify';
 import {ThunkActionResult} from '../../types/thunk-action';
-import {setProducts, setProductsStatus} from './products-actions';
+import {setProducts, setProductsStatus, setProductsTotalCount} from './products-actions';
 import {StatusType} from '../../enums';
 import {Product} from '../../types/product';
-import {APIRoute, Namespace, NUM_PRODUCTS_PER_PAGE, ErrorMessage, SearchParamPostfix} from '../../constants';
+import {APIRoute, Namespace, ErrorMessage, SearchParamPostfix, RESPONSE_HEADER_X_TOTAL_COUNT} from '../../constants';
 import {mergeSearchParams} from '../../utils';
 
 const fetchProducts = (searchParams: URLSearchParams): ThunkActionResult => (
@@ -12,12 +12,11 @@ const fetchProducts = (searchParams: URLSearchParams): ThunkActionResult => (
     await api.get<Product[]>(APIRoute.Products, {params:
         mergeSearchParams(new URLSearchParams({
           [SearchParamPostfix.Embed]: Namespace.Comments,
-          [SearchParamPostfix.Start]: '0',
-          [SearchParamPostfix.Limit]: NUM_PRODUCTS_PER_PAGE.toString(),
         }), searchParams),
     })
-      .then(({data}) => {
+      .then(({data, headers}) => {
         dispatch(setProducts(data));
+        dispatch(setProductsTotalCount(Number(headers[RESPONSE_HEADER_X_TOTAL_COUNT])));
         dispatch(setProductsStatus(StatusType.Success));
       })
       .catch(() => {

@@ -6,10 +6,10 @@ import {AppRoute} from '../../constants';
 function App(): JSX.Element {
   return (
     <Switch>
-      <Route exact path={AppRoute.MainScreen}>
-        <Redirect to={AppRoute.CatalogScreen} />
+      <Route exact path={[AppRoute.MainScreen, AppRoute.CatalogScreen]}>
+        <Redirect to={`${AppRoute.CatalogPagination}_1`} />
       </Route>
-      <Route exact path={AppRoute.CatalogScreen}>
+      <Route exact path={AppRoute.CatalogScreenWithPageId}>
         <CatalogScreen />
       </Route>
     </Switch>
