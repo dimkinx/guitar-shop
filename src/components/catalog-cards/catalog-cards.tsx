@@ -11,7 +11,7 @@ import {NUM_PRODUCTS_PER_PAGE, SearchParamPostfix} from '../../constants';
 
 function CatalogCards(): JSX.Element {
   const {pageId} = useParams<{pageId: string}>();
-  const firstPageIndex = pageId ? (Number(pageId) - 1) * NUM_PRODUCTS_PER_PAGE : 0;
+  const firstPageIndex = pageId ? (parseInt(pageId, 10) - 1) * NUM_PRODUCTS_PER_PAGE : 0;
 
   const location = useLocation();
   const dispatch = useDispatch();
