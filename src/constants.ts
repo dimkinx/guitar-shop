@@ -14,7 +14,7 @@ const AppRoute = {
   MainScreen: '/',
   CatalogScreen: '/catalog',
   CatalogScreenWithPageId: '/catalog/page_:pageId',
-  CatalogPagination: '/catalog/page',
+  CatalogPaginationPrefix: '/catalog/page',
 } as const;
 
 const SearchParamKey = {

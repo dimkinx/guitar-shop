@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useDebounce} from 'use-debounce';
 import {getPriceRange} from '../../store/filter/filter-selectors';
 import {fetchPriceRange} from '../../store/filter/filter-api-actions';
-import {GuitarType, StringCountType} from '../../enums';
+import {EssenceType, GuitarType, StringCountType} from '../../enums';
 import {APP_LOCALE, DEBOUNCE_DELAY, SearchParamKey, SearchParamPostfix} from '../../constants';
 
 const GuitarTypeToStringCountMap = new Map([
@@ -20,24 +20,64 @@ const StringCountToGuitarTypeMap = new Map([
   [StringCountType.Twelve, [GuitarType.Acoustic]],
 ]);
 
+const parseURLSearchParams = (
+  returnEssence: EssenceType,
+  params: URLSearchParams,
+  searchParamKey: string,
+  typeMap?: Map<GuitarType | StringCountType, (GuitarType | StringCountType)[]> | undefined,
+) => {
+  const stateMap = new Map();
+  const values = params.getAll(searchParamKey);
+
+  if (returnEssence === EssenceType.Current) {
+    return values;
+  }
+
+  values.forEach((value) => stateMap.set(value, typeMap?.get(value as GuitarType | StringCountType)));
+
+  if (returnEssence === EssenceType.Available) {
+    return [...new Set([...stateMap.values()].flat())];
+  }
+
+  return stateMap;
+};
+
 function CatalogFilter(): JSX.Element {
   const history = useHistory();
   const dispatch = useDispatch();
   const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
 
   const availablePriceRange = useSelector(getPriceRange);
 
-  const [priceRange, setPriceRange] = useState({min: null as null | number, max: null as null | number});
+  const initialStatePriceRange = {
+    min: searchParams.has(SearchParamKey.Price.concat(SearchParamPostfix.Gte))
+      ? Number(searchParams.get(SearchParamKey.Price.concat(SearchParamPostfix.Gte)))
+      : null,
+    max: searchParams.has(SearchParamKey.Price.concat(SearchParamPostfix.Lte))
+      ? Number(searchParams.get(SearchParamKey.Price.concat(SearchParamPostfix.Lte)))
+      : null,
+  };
+  const [priceRange, setPriceRange] = useState(initialStatePriceRange);
   const [debouncedPriceRange] = useDebounce(priceRange, DEBOUNCE_DELAY);
 
-  const [availableGuitarTypes, setAvailableGuitarTypes] = useState<GuitarType[]>([]);
-  const [currentGuitarTypes, setCurrentGuitarTypes] = useState<GuitarType[]>([]);
+  const initialStateCurrentGuitarTypes = parseURLSearchParams(EssenceType.Current, searchParams, SearchParamKey.Type) as GuitarType[];
+  const [currentGuitarTypes, setCurrentGuitarTypes] = useState<GuitarType[]>(initialStateCurrentGuitarTypes);
 
-  const [availableStringCounts, setAvailableStringCounts] = useState<StringCountType[]>([]);
-  const [currentStringCounts, setCurrentStringCounts] = useState<StringCountType[]>([]);
+  const initialStateCurrentStringCounts = parseURLSearchParams(EssenceType.Current, searchParams, SearchParamKey.StringCount) as StringCountType[];
+  const [currentStringCounts, setCurrentStringCounts] = useState<StringCountType[]>(initialStateCurrentStringCounts);
 
-  const [guitarTypeMap, setGuitarTypeMap] = useState(() => new Map());
-  const [stringCountMap, setStringCountMap] = useState(() => new Map());
+  const initialStateAvailableGuitarTypes = parseURLSearchParams(EssenceType.Available, searchParams, SearchParamKey.StringCount, StringCountToGuitarTypeMap) as GuitarType[];
+  const [availableGuitarTypes, setAvailableGuitarTypes] = useState<GuitarType[]>(initialStateAvailableGuitarTypes);
+
+  const initialStateAvailableStringCounts = parseURLSearchParams(EssenceType.Available, searchParams, SearchParamKey.Type, GuitarTypeToStringCountMap) as StringCountType[];
+  const [availableStringCounts, setAvailableStringCounts] = useState<StringCountType[]>(initialStateAvailableStringCounts);
+
+  const initialStateCurrentGuitarTypeMap = parseURLSearchParams(EssenceType.StateMap, searchParams, SearchParamKey.Type, GuitarTypeToStringCountMap) as Map<GuitarType, StringCountType[]>;
+  const [guitarTypeMap, setGuitarTypeMap] = useState(() => initialStateCurrentGuitarTypeMap);
+
+  const initialStateCurrentStringCountMap = parseURLSearchParams(EssenceType.StateMap, searchParams, SearchParamKey.StringCount, StringCountToGuitarTypeMap) as Map<StringCountType, GuitarType[]>;
+  const [stringCountMap, setStringCountMap] = useState(() => initialStateCurrentStringCountMap);
 
   const handleOnlyNumberKeyPress = (evt: KeyboardEvent<HTMLInputElement>) => {
     if (!/\d/.test(evt.key)) {
@@ -87,7 +127,7 @@ function CatalogFilter(): JSX.Element {
         GuitarTypeToStringCountMap.get(checkbox.name as GuitarType) as StringCountType[],
       )
       : () => {
-        guitarTypeMap.delete(checkbox.name);
+        guitarTypeMap.delete(checkbox.name as GuitarType);
         return guitarTypeMap;
       });
 
@@ -111,7 +151,7 @@ function CatalogFilter(): JSX.Element {
         StringCountToGuitarTypeMap.get(checkbox.dataset.stringCount as StringCountType) as GuitarType[],
       )
       : () => {
-        stringCountMap.delete(checkbox.dataset.stringCount as string);
+        stringCountMap.delete(checkbox.dataset.stringCount as StringCountType);
         return stringCountMap;
       });
 
@@ -127,12 +167,12 @@ function CatalogFilter(): JSX.Element {
   };
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
+    const params = new URLSearchParams(location.search);
 
-    searchParams.delete(SearchParamKey.Price.concat(SearchParamPostfix.Gte));
-    searchParams.delete(SearchParamKey.Price.concat(SearchParamPostfix.Lte));
+    params.delete(SearchParamKey.Price.concat(SearchParamPostfix.Gte));
+    params.delete(SearchParamKey.Price.concat(SearchParamPostfix.Lte));
 
-    dispatch(fetchPriceRange(searchParams));
+    dispatch(fetchPriceRange(params));
   }, [dispatch, location.search]);
 
   useEffect(() => {
@@ -217,7 +257,7 @@ function CatalogFilter(): JSX.Element {
     currentStringCounts.forEach((stringCount) => params.append(SearchParamKey.StringCount, stringCount));
 
     history.push({search: params.toString()});
-  }, [debouncedPriceRange, availablePriceRange, currentGuitarTypes, currentStringCounts, history]);
+  }, [availablePriceRange, currentGuitarTypes, currentStringCounts, debouncedPriceRange]);
 
   return (
     <form className="catalog-filter">

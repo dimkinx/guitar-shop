@@ -41,4 +41,10 @@ const enum StringCountType {
   Twelve = '12',
 }
 
-export {StatusType, ActionType, SortType, OrderType, GuitarType, StringCountType};
+const enum EssenceType {
+  Current = 'current',
+  Available = 'available',
+  StateMap = 'stateMap',
+}
+
+export {StatusType, ActionType, SortType, OrderType, GuitarType, StringCountType, EssenceType};

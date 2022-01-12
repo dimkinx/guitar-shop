@@ -7,7 +7,7 @@ function App(): JSX.Element {
   return (
     <Switch>
       <Route exact path={[AppRoute.MainScreen, AppRoute.CatalogScreen]}>
-        <Redirect to={`${AppRoute.CatalogPagination}_1`} />
+        <Redirect to={`${AppRoute.CatalogPaginationPrefix}_1`} />
       </Route>
       <Route exact path={AppRoute.CatalogScreenWithPageId}>
         <CatalogScreen />
