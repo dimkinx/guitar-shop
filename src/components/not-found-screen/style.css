@@ -1,0 +1,73 @@
+.wrapper-404 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.title-404 {
+  position: relative;
+  margin: 0;
+  font-size: 160px;
+  font-weight: 700;
+  line-height: 160px;
+}
+
+.title-404:before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: -3px;
+  text-shadow: 3px 0 #722aff;
+  color: #000;
+  background: #fff;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: glitch-animation 1s infinite linear alternate-reverse;
+}
+
+.title-404:after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 3px;
+  text-shadow: -3px 0 #ff0000;
+  color: #000;
+  background: #fff;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: glitch-animation 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-animation {
+  0% { clip: rect(114px, 9999px, 155px, 0); }
+  10% { clip: rect(82px, 9999px, 133px, 0); }
+  20% { clip: rect(15px, 9999px, 36px, 0); }
+  30% { clip: rect(29px, 9999px, 52px, 0); }
+  40% { clip: rect(76px, 9999px, 17px, 0); }
+  50% { clip: rect(134px, 9999px, 5px, 0); }
+  60% { clip: rect(2px, 9999px, 154px, 0); }
+  70% { clip: rect(133px, 9999px, 159px, 0); }
+  80% { clip: rect(12px, 9999px, 29px, 0); }
+  90% { clip: rect(12px, 9999px, 130px, 0); }
+  100% { clip: rect(48px, 9999px, 89px, 0); }
+}
+
+.description-404 {
+  font-size: 16px;
+}
+
+.description-404__link {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.description-404__link:hover,
+.description-404__link:focus {
+  color: #c90606;
+}
+
+.description-404__link:active {
+  opacity: 0.8;
+}
