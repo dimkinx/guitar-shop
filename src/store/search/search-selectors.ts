@@ -3,6 +3,7 @@ import {Product} from '../../types/product';
 import {StatusType} from '../../enums';
 
 const getFoundProducts = (state: State): Product[] => state.search.foundProducts;
-const getFoundProductsStatus = (state: State): StatusType => state.search.status;
+const isFoundProductsLoading = (state: State): boolean => state.search.status === StatusType.Loading;
+const isFoundProductsSuccess = (state: State): boolean => state.search.status === StatusType.Success;
 
-export {getFoundProducts, getFoundProductsStatus};
+export {getFoundProducts, isFoundProductsLoading, isFoundProductsSuccess};

@@ -35,22 +35,33 @@ function CatalogCards(): JSX.Element {
   }, [dispatch, firstPageIndex, location.search, orderType, sortType]);
 
   return (
-    <div className="cards catalog__cards">
+    <>
       {(isLoading || isFailure) && (
-        createIndexList(NUM_PRODUCTS_PER_PAGE)
-          .map((index) => (
-            <ProductCardSkeleton
-              key={index}
-            />
-          ))
+        <div className="cards catalog__cards">
+          {createIndexList(NUM_PRODUCTS_PER_PAGE)
+            .map((index) => (
+              <ProductCardSkeleton
+                key={index}
+              />
+            ))}
+        </div>
       )}
-      {isSuccess && products.map((product) => (
-        <ProductCard
-          key={product.id}
-          product={product}
-        />
-      ))}
-    </div>
+      {isSuccess && products.length > 0 &&  (
+        <div className="cards catalog__cards">
+          {isSuccess && products.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+            />
+          ))}
+        </div>
+      )}
+      {isSuccess && products.length === 0 && (
+        <div className="empty catalog__empty">
+          <h3>Запрашиваемые товары не найдены</h3>
+        </div>
+      )}
+    </>
   );
 }
 

@@ -256,7 +256,7 @@ function CatalogFilter(): JSX.Element {
     currentGuitarTypes.forEach((guitarType) => params.append(SearchParamKey.Type, guitarType));
     currentStringCounts.forEach((stringCount) => params.append(SearchParamKey.StringCount, stringCount));
 
-    history.push({search: params.toString()});
+    history.replace({search: params.toString()});
   }, [availablePriceRange, currentGuitarTypes, currentStringCounts, debouncedPriceRange]);
 
   return (

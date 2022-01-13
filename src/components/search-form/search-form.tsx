@@ -1,12 +1,13 @@
 import {FormEvent, KeyboardEvent, useEffect, useRef, useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {useDebounce} from 'use-debounce';
-import {getFoundProducts, getFoundProductsStatus} from '../../store/search/search-selectors';
+import {getFoundProducts, isFoundProductsLoading, isFoundProductsSuccess} from '../../store/search/search-selectors';
 import {fetchFoundProducts} from '../../store/search/search-api-actions';
 import {setFoundProducts, setFoundProductsStatus} from '../../store/search/search-actions';
 import {DEBOUNCE_DELAY, KeyAttributeValue, SearchParamPostfix, SearchParamKey} from '../../constants';
 import {StatusType} from '../../enums';
+import {addClassModifier} from '../../utils';
 
 function SearchForm(): JSX.Element {
   const [isSelectListOpen, setIsSelectListOpen] = useState(false);
@@ -17,9 +18,11 @@ function SearchForm(): JSX.Element {
   const selectElements = useRef<Record<number, HTMLLIElement>>({});
 
   const foundProducts = useSelector(getFoundProducts);
-  const foundProductsStatus = useSelector(getFoundProductsStatus);
+  const isLoading = useSelector(isFoundProductsLoading);
+  const isSuccess = useSelector(isFoundProductsSuccess);
 
   const history = useHistory();
+  const {search} = useLocation();
   const dispatch = useDispatch();
 
   let timer: number | null = null;
@@ -64,7 +67,10 @@ function SearchForm(): JSX.Element {
       case KeyAttributeValue.Enter:
         evt.preventDefault();
         if (highlightedIndex !== -1 && isSelectListOpen) {
-          history.push(`#${foundProducts[highlightedIndex].id}`);
+          history.push({
+            search: search,
+            hash: `#${foundProducts[highlightedIndex].id}`,
+          });
         }
         break;
       default:
@@ -82,7 +88,10 @@ function SearchForm(): JSX.Element {
   };
 
   const handleSelectElementClick = (id: number) => () => {
-    history.push(`#${id}`);
+    history.push({
+      search: search,
+      hash: `#${id}`,
+    });
   };
 
   useEffect(() => {
@@ -108,9 +117,6 @@ function SearchForm(): JSX.Element {
       <form
         onSubmit={handleFormSubmit}
         className="form-search__form"
-        style={foundProducts.length <= 0 && foundProductsStatus === StatusType.Success
-          ? {borderColor:'#c90606'}
-          : undefined}
       >
         <button
           className="form-search__submit"
@@ -135,20 +141,15 @@ function SearchForm(): JSX.Element {
           autoComplete="off"
           placeholder="что вы ищите?"
         />
-        {foundProductsStatus === StatusType.Loading && (
-          <img
-            style={{position:'absolute', top:5, right:5}}
-            width="30"
-            height="30"
-            src="./img/svg/loader.svg"
-            alt="Загрузка..."
-          />
+        {isLoading && (
+          <svg className="form-search__icon-loader" width="30" height="30" aria-hidden="true">
+            <use xlinkHref="#icon-loader" />
+          </svg>
         )}
       </form>
       {isSelectListOpen && foundProducts.length > 0 && (
         <ul
           className="form-search__select-list"
-          style={{zIndex: '1'}}
           tabIndex={-1}
         >
           {foundProducts.map((foundProduct, index) => (
@@ -157,13 +158,15 @@ function SearchForm(): JSX.Element {
               onMouseEnter={handleSelectElementMouseEnter(index)}
               onClick={handleSelectElementClick(foundProduct.id)}
               ref={(node: HTMLLIElement) => (selectElements.current[index] = node)}
-              className="form-search__select-item"
-              style={highlightedIndex === index
-                ? {color:'#545454'}
-                : undefined}
+              className={addClassModifier(highlightedIndex === index, 'form-search__select-item', 'hover')}
             >{foundProduct.name}
             </li>
           ))}
+        </ul>
+      )}
+      {isSelectListOpen && isSuccess && foundProducts.length === 0 && (
+        <ul className="form-search__select-list">
+          <li className="form-search__select-item">Поиск не дал результатов</li>
         </ul>
       )}
     </div>
