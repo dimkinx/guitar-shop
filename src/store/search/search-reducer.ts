@@ -18,4 +18,4 @@ const searchReducer = createReducer(searchInitialState, (builder) => {
     });
 });
 
-export {searchReducer};
+export {searchInitialState, searchReducer};

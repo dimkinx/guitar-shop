@@ -96,9 +96,9 @@ function SearchForm(): JSX.Element {
 
   useEffect(() => {
     if (debouncedSearchValue) {
-      dispatch(fetchFoundProducts({
+      dispatch(fetchFoundProducts(new URLSearchParams({
         [SearchParamKey.Name.concat(SearchParamPostfix.Like)]: debouncedSearchValue,
-      }));
+      })));
     }
 
     return () => {

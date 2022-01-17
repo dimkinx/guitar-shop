@@ -17,7 +17,7 @@ function Pagination(): JSX.Element {
   const currentPageId = parseInt(pageId, 10);
 
   useEffect(() => {
-    if (isProductsSuccessStatus && currentPageId > totalPageCount) {
+    if (isProductsSuccessStatus && (!currentPageId || currentPageId > totalPageCount)) {
       history.replace({
         pathname: `${AppRoute.CatalogPaginationPrefix}_1`,
         search: search,

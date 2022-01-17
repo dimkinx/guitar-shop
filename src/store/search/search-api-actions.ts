@@ -4,12 +4,11 @@ import {setFoundProducts, setFoundProductsStatus} from './search-actions';
 import {StatusType} from '../../enums';
 import {Product} from '../../types/product';
 import {APIRoute, ErrorMessage} from '../../constants';
-import {QueryParams} from '../../types/query-params';
 
-const fetchFoundProducts = (queryParams?: QueryParams): ThunkActionResult => (
+const fetchFoundProducts = (searchParams: URLSearchParams): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
     dispatch(setFoundProductsStatus(StatusType.Loading));
-    await api.get<Product[]>(APIRoute.Products, {params: queryParams})
+    await api.get<Product[]>(APIRoute.Products, {params: searchParams})
       .then(({data}) => {
         dispatch(setFoundProducts(data));
         dispatch(setFoundProductsStatus(StatusType.Success));

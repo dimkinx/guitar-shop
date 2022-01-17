@@ -32,7 +32,7 @@ function ProductCard({product}: ProductCardProps): JSX.Element {
         <p className="product-card__title">
           {name}
         </p>
-        <p className="product-card__price">
+        <p className="product-card__price" data-testid="price">
           <span className="visually-hidden">Цена:</span>
           {`${price.toLocaleString(APP_LOCALE)} ₽`}
         </p>

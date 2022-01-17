@@ -22,4 +22,4 @@ const productsReducer = createReducer(productsInitialState, (builder) => {
     });
 });
 
-export {productsReducer};
+export {productsInitialState, productsReducer};

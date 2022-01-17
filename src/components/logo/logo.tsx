@@ -3,10 +3,10 @@ import {Link, useLocation} from 'react-router-dom';
 import {AppRoute} from '../../constants';
 
 type LogoProps = {
-  className: string;
+  className?: string;
 }
 
-function Logo({className}: LogoProps): JSX.Element {
+function Logo({className = 'header'}: LogoProps): JSX.Element {
   const location = useLocation();
   const isMainScreenRoute = location.pathname === AppRoute.MainScreen;
 

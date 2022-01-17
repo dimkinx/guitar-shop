@@ -17,4 +17,4 @@ const sortReducer = createReducer(sortInitialState, (builder) => {
     });
 });
 
-export {sortReducer};
+export {sortInitialState, sortReducer};

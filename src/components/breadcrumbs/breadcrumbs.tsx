@@ -1,9 +1,11 @@
-import {Link, useLocation} from 'react-router-dom';
+import {Link, useLocation, useParams} from 'react-router-dom';
 import {AppRoute} from '../../constants';
 
 function Breadcrumbs(): JSX.Element {
   const location = useLocation();
-  const isCatalogScreenRoute = location.pathname === AppRoute.CatalogScreen;
+  const {pageId} = useParams<{pageId: string}>();
+  const isCatalogScreenRoute = location.pathname === AppRoute.CatalogScreen
+    || location.pathname === `${AppRoute.CatalogPaginationPrefix}_${pageId}`;
 
   return (
     <ul className="breadcrumbs page-content__breadcrumbs">

@@ -24,4 +24,4 @@ const filterReducer = createReducer(filterInitialState, (builder) => {
     });
 });
 
-export {filterReducer};
+export {filterInitialState, filterReducer};

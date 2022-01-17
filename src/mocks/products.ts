@@ -13,6 +13,6 @@ const createMockProduct = (): Product => ({
   price: datatype.number({min: 1000, max: 100000}),
 });
 
-const createMockProducts = (): Product[] => new Array(datatype.number(10)).fill(null).map(() => createMockProduct());
+const createMockProducts = (amount = 10): Product[] => new Array(amount).fill(null).map(() => createMockProduct());
 
-export {createMockProducts};
+export {createMockProduct, createMockProducts};
