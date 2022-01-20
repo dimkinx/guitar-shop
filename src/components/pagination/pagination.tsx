@@ -38,15 +38,15 @@ function Pagination(): JSX.Element {
               </Link>
             </li>
           )}
-          {createIndexList(totalPageCount).map((index) => (
+          {createIndexList(totalPageCount).map((value) => (
             <li
-              key={index}
-              className={addClassModifier(currentPageId === index + 1, 'pagination__page')}
+              key={value}
+              className={addClassModifier(currentPageId === value + 1, 'pagination__page')}
             >
               <Link
                 className="link pagination__page-link"
-                to={(location) => ({...location, pathname: `${AppRoute.CatalogPaginationPrefix}_${index + 1}`})}
-              >{index + 1}
+                to={(location) => ({...location, pathname: `${AppRoute.CatalogPaginationPrefix}_${value + 1}`})}
+              >{value + 1}
               </Link>
             </li>
           ))}
