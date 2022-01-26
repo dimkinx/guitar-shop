@@ -1,4 +1,4 @@
-import {Comment} from './comment';
+import {Review} from './review';
 
 type Product = {
   id: number;
@@ -10,7 +10,7 @@ type Product = {
   stringCount: number;
   rating: number;
   price: number;
-  comments?: Comment[];
+  comments?: Review[];
 }
 
 export type {Product};

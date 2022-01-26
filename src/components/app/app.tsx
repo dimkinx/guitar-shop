@@ -1,6 +1,7 @@
 import React from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import CatalogScreen from '../catalog-screen/catalog-screen';
+import ProductScreen from '../product-screen/product-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import {AppRoute} from '../../constants';
 
@@ -12,6 +13,9 @@ function App(): JSX.Element {
       </Route>
       <Route exact path={AppRoute.CatalogScreenWithPageId}>
         <CatalogScreen />
+      </Route>
+      <Route exact path={AppRoute.ProductScreenWithProductId}>
+        <ProductScreen />
       </Route>
       <Route>
         <NotFoundScreen />

@@ -2,6 +2,18 @@ import {OrderType, SortType, StatusType} from '../enums';
 import {Product} from './product';
 import {Namespace} from '../constants';
 
+type ProductState = {
+  product: Product | null,
+  status: StatusType,
+};
+
+type ReviewsState = {
+  reviews: Review[],
+  totalCount: number,
+  status: StatusType,
+  postStatus: StatusType,
+};
+
 type ProductsState = {
   products: Product[],
   totalCount: number,
