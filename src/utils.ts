@@ -13,4 +13,13 @@ const mergeSearchParams = (firstSearchParams: URLSearchParams, secondSearchParam
   return result;
 };
 
-export {createIndexList, addClassModifier, mergeSearchParams};
+const getFocusableElements = (parentElement: Element): Element[] => {
+  const focusableElements = [...parentElement.querySelectorAll('a, button, input, textarea, select, details, [tabindex]')];
+
+  return focusableElements.filter((focusableElement) => (
+    !focusableElement.hasAttribute('disabled')
+    && focusableElement.getAttribute('tabindex') !== '-1'
+  ));
+};
+
+export {createIndexList, addClassModifier, mergeSearchParams, getFocusableElements};
