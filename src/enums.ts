@@ -3,9 +3,18 @@ const enum StatusType {
   Loading = 'loading',
   Success = 'success',
   Failure = 'failure',
+  NotFound = 'notFound',
 }
 
 const enum ActionType {
+  SetProduct = 'product/setProduct',
+  SetProductStatus = 'product/setProductStatus',
+  SetReview = 'reviews/setReview',
+  SetReviewStatus = 'reviews/setReviewStatus',
+  SetReviews = 'reviews/setReviews',
+  SetFetchedReviews = 'reviews/setFetchedReviews',
+  SetReviewsStatus = 'reviews/setReviewsStatus',
+  SetReviewsTotalCount = 'reviews/setReviewsTotalCount',
   SetProducts = 'products/setProducts',
   SetProductsTotalCount = 'products/setProductsTotalCount',
   SetProductsStatus = 'products/setProductsStatus',
@@ -21,6 +30,7 @@ const enum ActionType {
 const enum SortType {
   Price = 'price',
   Rating = 'rating',
+  Date = 'createAt',
 }
 
 const enum OrderType {

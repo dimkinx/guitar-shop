@@ -1,5 +1,6 @@
 import {OrderType, SortType, StatusType} from '../enums';
 import {Product} from './product';
+import {Review} from './review';
 import {Namespace} from '../constants';
 
 type ProductState = {
@@ -41,10 +42,12 @@ type FilterState = {
 };
 
 type State = {
-  [Namespace.Products]: ProductsState,
+  [Namespace.Product]: ProductState,
+  [Namespace.Reviews]: ReviewsState,
+  [Namespace.GetProducts]: ProductsState,
   [Namespace.Search]: SearchState,
   [Namespace.Sort]: SortState,
   [Namespace.Filter]: FilterState,
 };
 
-export type {ProductsState, SearchState, SortState, FilterState, PriceRangeState, State};
+export type {ProductState, ReviewsState, ProductsState, SearchState, SortState, PriceRangeState, FilterState, State};

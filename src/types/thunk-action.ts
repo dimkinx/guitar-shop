@@ -1,7 +1,14 @@
 import {Action, ThunkAction} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
-import {ProductsState, SearchState} from './state';
+import {ProductState, ReviewsState, ProductsState, SearchState, SortState, FilterState} from './state';
 
-type ThunkActionResult<R = Promise<void>> = ThunkAction<R, {products: ProductsState; search: SearchState}, AxiosInstance, Action>;
+type ThunkActionResult<R = Promise<void>> = ThunkAction<R, {
+  product: ProductState;
+  reviews: ReviewsState;
+  products: ProductsState;
+  search: SearchState;
+  sort: SortState,
+  filter: FilterState
+}, AxiosInstance, Action>;
 
 export type {ThunkActionResult};
