@@ -1,11 +1,11 @@
 import {FormEvent, KeyboardEvent, useEffect, useRef, useState} from 'react';
-import {useHistory, useLocation} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {useDebounce} from 'use-debounce';
 import {getFoundProducts, isFoundProductsLoading, isFoundProductsSuccess} from '../../store/search/search-selectors';
 import {fetchFoundProducts} from '../../store/search/search-api-actions';
 import {setFoundProducts, setFoundProductsStatus} from '../../store/search/search-actions';
-import {DEBOUNCE_DELAY, KeyAttributeValue, SearchParamPostfix, SearchParamKey} from '../../constants';
+import {DEBOUNCE_DELAY, KeyAttributeValue, SearchParamPostfix, SearchParamKey, AppRoute} from '../../constants';
 import {StatusType} from '../../enums';
 import {addClassModifier} from '../../utils';
 
@@ -18,11 +18,10 @@ function SearchForm(): JSX.Element {
   const selectElements = useRef<Record<number, HTMLLIElement>>({});
 
   const foundProducts = useSelector(getFoundProducts);
-  const isLoading = useSelector(isFoundProductsLoading);
-  const isSuccess = useSelector(isFoundProductsSuccess);
+  const isLoadingStatus = useSelector(isFoundProductsLoading);
+  const isSuccessStatus = useSelector(isFoundProductsSuccess);
 
   const history = useHistory();
-  const {search} = useLocation();
   const dispatch = useDispatch();
 
   let timer: number | null = null;
@@ -67,10 +66,7 @@ function SearchForm(): JSX.Element {
       case KeyAttributeValue.Enter:
         evt.preventDefault();
         if (highlightedIndex !== -1 && isSelectListOpen) {
-          history.push({
-            search: search,
-            hash: `#${foundProducts[highlightedIndex].id}`,
-          });
+          history.push(`${AppRoute.ProductScreenPrefix}${foundProducts[highlightedIndex].id}`);
         }
         break;
       default:
@@ -88,10 +84,7 @@ function SearchForm(): JSX.Element {
   };
 
   const handleSelectElementClick = (id: number) => () => {
-    history.push({
-      search: search,
-      hash: `#${id}`,
-    });
+    history.push(`${AppRoute.ProductScreenPrefix}${id}`);
   };
 
   useEffect(() => {
@@ -141,9 +134,9 @@ function SearchForm(): JSX.Element {
           autoComplete="off"
           placeholder="что вы ищите?"
         />
-        {isLoading && (
+        {isLoadingStatus && (
           <svg className="form-search__icon-loader" width="30" height="30" aria-hidden="true">
-            <use xlinkHref="#icon-loader" />
+            <use xlinkHref="#icon-oval-loader" />
           </svg>
         )}
       </form>
@@ -164,7 +157,7 @@ function SearchForm(): JSX.Element {
           ))}
         </ul>
       )}
-      {isSelectListOpen && isSuccess && foundProducts.length === 0 && (
+      {isSelectListOpen && isSuccessStatus && foundProducts.length === 0 && (
         <ul className="form-search__select-list">
           <li className="form-search__select-item">Поиск не дал результатов</li>
         </ul>

@@ -8,7 +8,7 @@ import {APIRoute, ErrorMessage} from '../../constants';
 const fetchFoundProducts = (searchParams: URLSearchParams): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
     dispatch(setFoundProductsStatus(StatusType.Loading));
-    await api.get<Product[]>(APIRoute.Products, {params: searchParams})
+    await api.get<Product[]>(APIRoute.GetProducts(), {params: searchParams})
       .then(({data}) => {
         dispatch(setFoundProducts(data));
         dispatch(setFoundProductsStatus(StatusType.Success));

@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import {Link, useHistory, useLocation, useParams} from 'react-router-dom';
 import {getProductsTotalCount, isProductsSuccess} from '../../store/products/products-selectors';
 import {addClassModifier, createIndexList} from '../../utils';
-import {AppRoute, NUM_PRODUCTS_PER_PAGE} from '../../constants';
+import {AppRoute, PRODUCTS_COUNT_PER_PAGE} from '../../constants';
 
 function Pagination(): JSX.Element {
   const history = useHistory();
@@ -11,7 +11,7 @@ function Pagination(): JSX.Element {
 
   const isProductsSuccessStatus = useSelector(isProductsSuccess);
   const totalCount = useSelector(getProductsTotalCount);
-  const totalPageCount = Math.ceil(totalCount / NUM_PRODUCTS_PER_PAGE);
+  const totalPageCount = Math.ceil(totalCount / PRODUCTS_COUNT_PER_PAGE);
 
   const {pageId} = useParams<{pageId: string}>();
   const currentPageId = parseInt(pageId, 10);
@@ -19,7 +19,7 @@ function Pagination(): JSX.Element {
   useEffect(() => {
     if (isProductsSuccessStatus && (!currentPageId || currentPageId > totalPageCount)) {
       history.replace({
-        pathname: `${AppRoute.CatalogPaginationPrefix}_1`,
+        pathname: `${AppRoute.CatalogScreenPrefix}_1`,
         search: search,
       });
     }
@@ -33,7 +33,7 @@ function Pagination(): JSX.Element {
             <li className="pagination__page pagination__page--prev" id="prev">
               <Link
                 className="link pagination__page-link"
-                to={(location) => ({...location, pathname: `${AppRoute.CatalogPaginationPrefix}_${currentPageId - 1}`})}
+                to={(location) => ({...location, pathname: `${AppRoute.CatalogScreenPrefix}_${currentPageId - 1}`})}
               >Назад
               </Link>
             </li>
@@ -45,7 +45,7 @@ function Pagination(): JSX.Element {
             >
               <Link
                 className="link pagination__page-link"
-                to={(location) => ({...location, pathname: `${AppRoute.CatalogPaginationPrefix}_${value + 1}`})}
+                to={(location) => ({...location, pathname: `${AppRoute.CatalogScreenPrefix}_${value + 1}`})}
               >{value + 1}
               </Link>
             </li>
@@ -54,7 +54,7 @@ function Pagination(): JSX.Element {
             <li className="pagination__page pagination__page--next" id="next">
               <Link
                 className="link pagination__page-link"
-                to={(location) => ({...location, pathname: `${AppRoute.CatalogPaginationPrefix}_${currentPageId + 1}`})}
+                to={(location) => ({...location, pathname: `${AppRoute.CatalogScreenPrefix}_${currentPageId + 1}`})}
               >Далее
               </Link>
             </li>

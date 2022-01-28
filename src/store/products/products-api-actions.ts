@@ -9,7 +9,7 @@ import {mergeSearchParams} from '../../utils';
 const fetchProducts = (searchParams: URLSearchParams): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
     dispatch(setProductsStatus(StatusType.Loading));
-    await api.get<Product[]>(APIRoute.Products, {params:
+    await api.get<Product[]>(APIRoute.GetProducts(), {params:
         mergeSearchParams(new URLSearchParams({
           [SearchParamPostfix.Embed]: Namespace.Comments,
         }), searchParams),

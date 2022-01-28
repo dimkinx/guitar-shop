@@ -7,11 +7,11 @@ import {fetchProducts} from '../../store/products/products-api-actions';
 import ProductCard from '../product-card/product-card';
 import {ReactComponent as ProductCardSkeleton} from '../../assets/skeleton-card.svg';
 import {createIndexList} from '../../utils';
-import {NUM_PRODUCTS_PER_PAGE, SearchParamPostfix} from '../../constants';
+import {PRODUCTS_COUNT_PER_PAGE, SearchParamPostfix} from '../../constants';
 
 function CatalogCards(): JSX.Element {
   const {pageId} = useParams<{pageId: string}>();
-  const firstPageIndex = pageId ? (parseInt(pageId, 10) - 1) * NUM_PRODUCTS_PER_PAGE : 0;
+  const cardIndex = pageId ? (parseInt(pageId, 10) - 1) * PRODUCTS_COUNT_PER_PAGE : 0;
 
   const location = useLocation();
   const dispatch = useDispatch();
@@ -26,19 +26,19 @@ function CatalogCards(): JSX.Element {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
 
-    searchParams.append(SearchParamPostfix.Start, firstPageIndex.toString());
-    searchParams.append(SearchParamPostfix.Limit, NUM_PRODUCTS_PER_PAGE.toString());
+    searchParams.append(SearchParamPostfix.Start, cardIndex.toString());
+    searchParams.append(SearchParamPostfix.Limit, PRODUCTS_COUNT_PER_PAGE.toString());
     sortType && searchParams.append(SearchParamPostfix.Sort, sortType);
     orderType && searchParams.append(SearchParamPostfix.Order, orderType);
 
     dispatch(fetchProducts(searchParams));
-  }, [dispatch, firstPageIndex, location.search, orderType, sortType]);
+  }, [dispatch, cardIndex, location.search, orderType, sortType]);
 
   return (
     <>
       {(isLoading || isFailure) && (
         <div className="cards catalog__cards" data-testid="loading-cards">
-          {createIndexList(NUM_PRODUCTS_PER_PAGE)
+          {createIndexList(PRODUCTS_COUNT_PER_PAGE)
             .map((index) => (
               <ProductCardSkeleton
                 key={index}
