@@ -10,7 +10,7 @@ import {filterReducer} from './filter/filter-reducer';
 const rootReducer = combineReducers({
   [Namespace.Product]: productReducer,
   [Namespace.Reviews]: reviewsReducer,
-  [Namespace.GetProducts]: productsReducer,
+  [Namespace.Products]: productsReducer,
   [Namespace.Search]: searchReducer,
   [Namespace.Sort]: sortReducer,
   [Namespace.Filter]: filterReducer,

@@ -22,9 +22,9 @@ const mockSearchParams = new URLSearchParams('');
 describe('Async API actions: filter', () => {
   it('should dispatch setPriceRangeMin, setPriceRangeMax and setPriceRangeStatus when GET /guitars', async () => {
     mockAPI
-      .onGet(APIRoute.Products)
+      .onGet(APIRoute.GetProducts())
       .replyOnce(200, [mockProductFirst])
-      .onGet(APIRoute.Products)
+      .onGet(APIRoute.GetProducts())
       .replyOnce(200, [mockProductSecond]);
 
     await store.dispatch(fetchPriceRange(mockSearchParams));

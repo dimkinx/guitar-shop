@@ -45,7 +45,7 @@ const SearchParamPostfix = {
 const Namespace = {
   Product: 'product',
   Reviews: 'reviews',
-  GetProducts: 'products',
+  Products: 'products',
   Comments: 'comments',
   Search: 'search',
   Sort: 'sort',

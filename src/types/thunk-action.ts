@@ -7,8 +7,8 @@ type ThunkActionResult<R = Promise<void>> = ThunkAction<R, {
   reviews: ReviewsState;
   products: ProductsState;
   search: SearchState;
-  sort: SortState,
-  filter: FilterState
+  sort: SortState;
+  filter: FilterState;
 }, AxiosInstance, Action>;
 
 export type {ThunkActionResult};

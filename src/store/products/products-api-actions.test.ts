@@ -22,7 +22,7 @@ const mockSearchParams = new URLSearchParams('');
 describe('Async API actions: products', () => {
   it('should dispatch setProducts, setProductsTotalCount and setProductsStatus when GET /guitars', async () => {
     mockAPI
-      .onGet(APIRoute.Products)
+      .onGet(APIRoute.GetProducts())
       .reply(200, mockProducts, mockHeaders);
 
     await store.dispatch(fetchProducts(mockSearchParams));

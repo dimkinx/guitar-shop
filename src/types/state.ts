@@ -44,7 +44,7 @@ type FilterState = {
 type State = {
   [Namespace.Product]: ProductState,
   [Namespace.Reviews]: ReviewsState,
-  [Namespace.GetProducts]: ProductsState,
+  [Namespace.Products]: ProductsState,
   [Namespace.Search]: SearchState,
   [Namespace.Sort]: SortState,
   [Namespace.Filter]: FilterState,
