@@ -94,7 +94,7 @@ function ReviewList({productId}: ReviewsProps): JSX.Element {
           const {id, userName, advantage, disadvantage, comment: commentText, rating, createAt} = review;
 
           return(
-            <li key={id} className="review">
+            <li key={id} className="review" data-testid="review">
               <div className="review__wrapper">
                 <h4 className="review__title review__title--author title title--lesser">{userName}</h4>
                 <span className="review__date">

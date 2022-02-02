@@ -9,7 +9,7 @@ const createMockReview = (): Review => ({
   comment: lorem.paragraph(),
   rating: datatype.number(5),
   createAt: time.recent('wide'),
-  guitarId: datatype.number(100),
+  guitarId: 0,
 });
 
 const createMockReviews = (amount = 10): Review[] => new Array(amount).fill(null).map(() => createMockReview());

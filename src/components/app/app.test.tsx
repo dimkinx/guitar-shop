@@ -4,15 +4,29 @@ import {render, screen} from '@testing-library/react';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {createMemoryHistory} from 'history';
 import App from './app';
+import {createMockProduct, createMockProducts} from '../../mocks/products';
+import {createMockReviews} from '../../mocks/reviews';
+import 'intersection-observer';
 import {AppRoute, Namespace} from '../../constants';
 import {StatusType} from '../../enums';
-import {createMockProducts} from '../../mocks/products';
 
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
 const mockProducts = createMockProducts();
+const mockProduct = createMockProduct();
+const mockReviews = createMockReviews();
 
 const store = mockStore({
+  [Namespace.Product]: {
+    product: mockProduct,
+    status: StatusType.Success,
+  },
+  [Namespace.Reviews]: {
+    reviews: mockReviews,
+    totalCount: mockReviews.length,
+    status: StatusType.Success,
+    postStatus: StatusType.Success,
+  },
   [Namespace.Products]: {
     products: mockProducts,
     totalCount: mockProducts.length,
@@ -58,6 +72,13 @@ describe('Application Routing', () => {
     render(FakeApp);
 
     expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(/Каталог гитар/i);
+  });
+
+  it('should render "ProductScreen" when user navigate to "/products/:productId"', () => {
+    history.push(AppRoute.ProductScreenPrefix.concat(mockProduct.id.toString()));
+    render(FakeApp);
+
+    expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(new RegExp(mockProduct.name,'i'));
   });
 
   it('should render "NotFoundScreen" when user navigate to non-existent route', () => {

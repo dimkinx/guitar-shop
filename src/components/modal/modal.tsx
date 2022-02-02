@@ -1,7 +1,7 @@
 import {ReactNode, ReactPortal, useCallback, useEffect, useRef, useState} from 'react';
 import {createPortal} from 'react-dom';
 import {CSSTransition} from 'react-transition-group';
-import {KeyAttributeValue} from '../../constants';
+import {FOCUS_TIMEOUT, KeyAttributeValue, TRANSITION_DELAY} from '../../constants';
 import FocusLock from 'react-focus-lock';
 import {getFocusableElements} from '../../utils';
 
@@ -42,7 +42,7 @@ function Modal({isModalOpen, onModalOpenSelect, className = '', children}: Modal
       const focusableElements = getFocusableElements(modalRef.current);
       const firstElement = focusableElements[0] as HTMLElement;
 
-      setTimeout(() => {firstElement.focus();}, 100);
+      setTimeout(() => {firstElement.focus();}, FOCUS_TIMEOUT);
     }
   };
 
@@ -51,7 +51,7 @@ function Modal({isModalOpen, onModalOpenSelect, className = '', children}: Modal
     document.body.style.paddingRight = '0px';
 
     if (lastActiveElement) {
-      setTimeout(() => {lastActiveElement.focus();}, 100);
+      setTimeout(() => {lastActiveElement.focus();}, FOCUS_TIMEOUT);
     }
   };
 
@@ -73,7 +73,7 @@ function Modal({isModalOpen, onModalOpenSelect, className = '', children}: Modal
       onEntering={handleTransitionEntering}
       onEntered={handleTransitionEntered}
       onExited={handleTransitionExited}
-      timeout={{enter: 0, exit: 600}}
+      timeout={{enter: 0, exit: TRANSITION_DELAY}}
       classNames={{enterDone: 'is-active'}}
       mountOnEnter
       unmountOnExit
@@ -81,6 +81,7 @@ function Modal({isModalOpen, onModalOpenSelect, className = '', children}: Modal
       <div
         ref={modalRef}
         className={`modal ${className}`}
+        data-testid="modal"
       >
         <div className="modal__wrapper">
           <div
@@ -104,7 +105,7 @@ function Modal({isModalOpen, onModalOpenSelect, className = '', children}: Modal
         </div>
       </div>
     </CSSTransition>,
-    document.querySelector('.modal-container') as HTMLDivElement,
+    document.body,
   );
 }
 

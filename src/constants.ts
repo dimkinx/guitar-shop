@@ -5,7 +5,9 @@ const REVIEWS_COUNT_PER_STEP = 3;
 const BACKEND_BASE_URL = 'https://accelerator-guitar-shop-api-v1.glitch.me';
 const RESPONSE_HEADER_X_TOTAL_COUNT = 'x-total-count';
 const REQUEST_TIMEOUT = 5000;
+const FOCUS_TIMEOUT = 100;
 const DEBOUNCE_DELAY = 500;
+const TRANSITION_DELAY = 600;
 
 const APIRoute = {
   GetProducts: () => '/guitars',
@@ -96,7 +98,9 @@ export {
   BACKEND_BASE_URL,
   RESPONSE_HEADER_X_TOTAL_COUNT,
   REQUEST_TIMEOUT,
+  FOCUS_TIMEOUT,
   DEBOUNCE_DELAY,
+  TRANSITION_DELAY,
   APIRoute,
   AppRoute,
   SearchParamKey,

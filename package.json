@@ -33,6 +33,7 @@
     "axios-mock-adapter": "1.19.0",
     "eslint-config-htmlacademy": "4.1.0",
     "faker": "5.5.3",
+    "intersection-observer": "0.12.0",
     "redux-devtools-extension": "2.13",
     "typescript": "4.5.4"
   },

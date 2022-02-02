@@ -15,7 +15,13 @@ function Rate({className, width, height, rating, children}: RateProps): JSX.Elem
     <div className={`rate ${className}`} aria-hidden="true">
       <span className="visually-hidden">Рейтинг:</span>
       {createIndexList(MAX_STARS_COUNT).map((value) => (
-        <svg key={`${value}-star`} width={width} height={height} aria-hidden="true">
+        <svg
+          key={`${value}-star`}
+          width={width}
+          height={height}
+          aria-hidden="true"
+          data-testid={(Math.round(rating) > value) ? 'star' : ''}
+        >
           <use xlinkHref={`#${(Math.round(rating) > value) ? 'icon-full-star' : 'icon-star'}`} />
         </svg>
       ))}

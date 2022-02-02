@@ -2,12 +2,13 @@ import {MouseEvent, useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {setReviews, setReviewsStatus, setReviewsTotalCount} from '../../store/reviews/reviews-actions';
-import {StatusType} from '../../enums';
+import {isReviewSuccess} from '../../store/reviews/reviews-selectors';
 import ReviewList from '../review-list/review-list';
 import ModalPostReview from '../modal-post-review/modal-post-review';
 import ModalSuccessReview from '../modal-success-review/modal-success-review';
 import {getFocusableElements} from '../../utils';
-import {isReviewSuccess} from '../../store/reviews/reviews-selectors';
+import {StatusType} from '../../enums';
+import {FOCUS_TIMEOUT, TRANSITION_DELAY} from '../../constants';
 
 type ReviewsProps = {
   productId: number;
@@ -43,7 +44,7 @@ function Reviews({productId, productName}: ReviewsProps): JSX.Element {
 
   useEffect(() => {
     if (isReviewSuccessStatus) {
-      setTimeout(() => {setIsModalSuccessReviewOpen(true);}, 700);
+      setTimeout(() => {setIsModalSuccessReviewOpen(true);}, FOCUS_TIMEOUT + TRANSITION_DELAY);
     }
   }, [isReviewSuccessStatus]);
 
