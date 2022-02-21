@@ -5,11 +5,8 @@ import {getProduct, isProductFailure, isProductIdle, isProductLoading, isProduct
 import {getReviewsTotalCount, isReviewsSuccess} from '../../store/reviews/reviews-selectors';
 import {fetchProduct} from '../../store/product/product-api-actions';
 import {setProductStatus} from '../../store/product/product-actions';
-import Header from '../header/header';
-import Breadcrumbs from '../breadcrumbs/breadcrumbs';
-import Rate from '../rate/rate';
-import Reviews from '../reviews/reviews';
-import Footer from '../footer/footer';
+import {Header, Breadcrumbs, Rate, Footer} from '../shared/shared';
+import {Reviews} from './components/components';
 import LoadingScreen from '../loading-screen/loadingScreen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import {addClassModifier} from '../../utils';
