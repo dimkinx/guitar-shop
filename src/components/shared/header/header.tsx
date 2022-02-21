@@ -35,8 +35,17 @@ function Header(): JSX.Element {
           </ul>
         </nav>
         <SearchForm />
-        <Link to="#" className="header__cart-link" aria-label="Корзина">
-          <svg className="header__cart-icon" width="14" height="14" aria-hidden="true">
+        <Link
+          to={AppRoute.CartScreen}
+          className="header__cart-link"
+          aria-label="Корзина"
+        >
+          <svg
+            className="header__cart-icon"
+            width="14"
+            height="14"
+            aria-hidden="true"
+          >
             <use xlinkHref="#icon-basket" />
           </svg>
           <span className="visually-hidden">Перейти в корзину</span>

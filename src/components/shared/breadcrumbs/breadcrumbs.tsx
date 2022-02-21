@@ -9,9 +9,11 @@ type BreadcrumbsProps = {
 function Breadcrumbs({productName}: BreadcrumbsProps): JSX.Element {
   const location = useLocation();
   const {pageId} = useParams<{pageId: string}>();
+
   const isCatalogScreenRoute = location.pathname === AppRoute.CatalogScreen
     || location.pathname === `${AppRoute.CatalogScreenPrefix}_${pageId}`;
   const isProductScreenRoute = location.pathname.startsWith(AppRoute.ProductScreenPrefix);
+  const isCartScreenRoute = location.pathname === AppRoute.CartScreen;
 
   useEffect(() => {
     if (isCatalogScreenRoute) {
@@ -19,6 +21,9 @@ function Breadcrumbs({productName}: BreadcrumbsProps): JSX.Element {
     }
     if (isProductScreenRoute) {
       document.title = `${productName} — Guitar-shop`;
+    }
+    if (isCartScreenRoute) {
+      document.title = 'Корзина — Guitar-shop';
     }
 
     return () => {
@@ -37,6 +42,11 @@ function Breadcrumbs({productName}: BreadcrumbsProps): JSX.Element {
       {isProductScreenRoute && (
         <li className="breadcrumbs__item">
           {productName}
+        </li>
+      )}
+      {isCartScreenRoute && (
+        <li className="breadcrumbs__item">
+          Корзина
         </li>
       )}
     </ul>

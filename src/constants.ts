@@ -23,6 +23,7 @@ const AppRoute = {
   CatalogScreenPrefix: '/catalog/page',
   ProductScreenWithProductId: '/products/:productId',
   ProductScreenPrefix: '/products/',
+  CartScreen: '/cart',
 } as const;
 
 const SearchParamKey = {
