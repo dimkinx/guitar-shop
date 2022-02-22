@@ -1,6 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {setProduct, setProductStatus} from './product-actions';
-import {StatusType} from '../../enums';
+import {StatusType} from '../../common/enums';
 import {ProductState} from '../../types/state';
 
 const productInitialState: ProductState = {

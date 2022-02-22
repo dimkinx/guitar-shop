@@ -4,21 +4,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useDebounce} from 'use-debounce';
 import {getPriceRange} from '../../../../store/filter/filter-selectors';
 import {fetchPriceRange} from '../../../../store/filter/filter-api-actions';
-import {EssenceType, GuitarType, StringCountType} from '../../../../enums';
-import {APP_LOCALE, DEBOUNCE_DELAY, SearchParamKey, SearchParamPostfix} from '../../../../constants';
-
-const GuitarTypeToStringCountMap = new Map([
-  [GuitarType.Acoustic, [StringCountType.Six, StringCountType.Seven, StringCountType.Twelve]],
-  [GuitarType.Electric, [StringCountType.Four, StringCountType.Six, StringCountType.Seven]],
-  [GuitarType.Ukulele, [StringCountType.Four]],
-]);
-
-const StringCountToGuitarTypeMap = new Map([
-  [StringCountType.Four, [GuitarType.Ukulele, GuitarType.Electric]],
-  [StringCountType.Six, [GuitarType.Acoustic, GuitarType.Electric]],
-  [StringCountType.Seven, [GuitarType.Acoustic, GuitarType.Electric]],
-  [StringCountType.Twelve, [GuitarType.Acoustic]],
-]);
+import {EssenceType, GuitarType, StringCountType} from '../../../../common/enums';
+import {APP_LOCALE, DEBOUNCE_DELAY, SearchParamKey, SearchParamPostfix} from '../../../../common/constants';
+import {GuitarTypeToStringCountMap, StringCountToGuitarTypeMap} from '../../../../common/collections';
 
 const parseURLSearchParams = (
   essenceType: EssenceType,

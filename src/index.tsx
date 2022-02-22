@@ -9,7 +9,7 @@ import {createAPI} from './services/api';
 import App from './components/app/app';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {ToastParam} from './constants';
+import {ToastParam} from './common/constants';
 
 const api = createAPI();
 

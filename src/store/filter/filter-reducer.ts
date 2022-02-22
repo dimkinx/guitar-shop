@@ -1,7 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {setPriceRangeMin, setPriceRangeMax, setPriceRangeStatus} from './filter-actions';
 import {FilterState} from '../../types/state';
-import {StatusType} from '../../enums';
+import {StatusType} from '../../common/enums';
 
 const filterInitialState: FilterState = {
   priceRange: {

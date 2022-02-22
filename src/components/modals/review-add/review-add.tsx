@@ -5,7 +5,7 @@ import Modal from '../modal/modal';
 import {ReviewPost} from '../../../types/review';
 import {isReviewLoading, isReviewSuccess} from '../../../store/reviews/reviews-selectors';
 import {setReviewStatus} from '../../../store/reviews/reviews-actions';
-import {StatusType} from '../../../enums';
+import {StatusType} from '../../../common/enums';
 
 const getReviewInitialState = (productId: number): ReviewPost => ({
   userName: '',
@@ -16,14 +16,14 @@ const getReviewInitialState = (productId: number): ReviewPost => ({
   guitarId: productId,
 });
 
-type ModalPostReviewProps = {
+type ReviewAddProps = {
   isModalOpen: boolean;
   onModalOpenSelect: (isOpen: boolean) => void;
   productId: number;
   productName: string;
 }
 
-function ReviewForm({isModalOpen, onModalOpenSelect, productId, productName}: ModalPostReviewProps): JSX.Element {
+function ReviewAdd({isModalOpen, onModalOpenSelect, productId, productName}: ReviewAddProps): JSX.Element {
   const isLoadingStatus = useSelector(isReviewLoading);
   const isSuccessStatus = useSelector(isReviewSuccess);
 
@@ -34,6 +34,7 @@ function ReviewForm({isModalOpen, onModalOpenSelect, productId, productName}: Mo
 
   const handleFieldChange = (evt: {target: HTMLInputElement | HTMLTextAreaElement}) => {
     const {name, value} = evt.target;
+
     setReview({...review, [name]: name === 'rating' ? Number(value) : value});
     setIsChanged(true);
   };
@@ -201,4 +202,4 @@ function ReviewForm({isModalOpen, onModalOpenSelect, productId, productName}: Mo
   );
 }
 
-export default ReviewForm;
+export default ReviewAdd;

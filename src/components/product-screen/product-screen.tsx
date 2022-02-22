@@ -9,15 +9,10 @@ import {Header, Breadcrumbs, Rate, Footer} from '../shared/shared';
 import {Reviews} from './components/components';
 import LoadingScreen from '../loading-screen/loadingScreen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
-import {addClassModifier} from '../../utils';
-import {GuitarType, StatusType} from '../../enums';
-import {APP_LOCALE, AppRoute, GuitarTypeTranslation} from '../../constants';
-
-const GuitarTypeToTranslationMap = new Map([
-  [GuitarType.Acoustic, GuitarTypeTranslation.Acoustic],
-  [GuitarType.Electric, GuitarTypeTranslation.Electric],
-  [GuitarType.Ukulele, GuitarTypeTranslation.Ukulele],
-]);
+import {addClassModifier} from '../../utils/utils';
+import {GuitarType, StatusType} from '../../common/enums';
+import {APP_LOCALE, AppRoute} from '../../common/constants';
+import {GuitarTypeToTranslationMap} from '../../common/collections';
 
 function ProductScreen(): JSX.Element {
   const {productId} = useParams<{productId: string}>();

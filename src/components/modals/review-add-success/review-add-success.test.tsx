@@ -1,12 +1,12 @@
 import {render, screen} from '@testing-library/react';
-import ReviewSuccessMessage from './review-success-message';
+import ReviewAddSuccess from './review-add-success';
 
 const onModalOpenSelect = jest.fn();
 
 describe('Component: ReviewSuccessMessage', () => {
   it('should render correctly', () => {
     render(
-      <ReviewSuccessMessage
+      <ReviewAddSuccess
         isModalOpen
         onModalOpenSelect={onModalOpenSelect}
       />);

@@ -1,7 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {setFetchedReviews, setReview, setReviews, setReviewsStatus, setReviewStatus, setReviewsTotalCount} from './reviews-actions';
-import {StatusType} from '../../enums';
 import {ReviewsState} from '../../types/state';
+import {StatusType} from '../../common/enums';
 
 const reviewsInitialState: ReviewsState = {
   reviews: [],

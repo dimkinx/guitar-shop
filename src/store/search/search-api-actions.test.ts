@@ -7,8 +7,8 @@ import {setFoundProducts, setFoundProductsStatus} from './search-actions';
 import {fetchFoundProducts} from './search-api-actions';
 import {State} from '../../types/state';
 import {createMockProducts} from '../../mocks/products';
-import {APIRoute} from '../../constants';
-import {StatusType} from '../../enums';
+import {StatusType} from '../../common/enums';
+import {APIRoute} from '../../common/constants';
 
 const api = createAPI();
 const mockAPI = new MockAdapter(api);

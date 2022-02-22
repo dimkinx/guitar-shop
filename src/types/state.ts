@@ -1,7 +1,8 @@
 import {OrderType, SortType, StatusType} from '../enums';
 import {Product} from './product';
 import {Review} from './review';
-import {Namespace} from '../constants';
+import {OrderType, SortType, StatusType} from '../common/enums';
+import {Namespace} from '../common/constants';
 
 type ProductState = {
   product: Product | null,

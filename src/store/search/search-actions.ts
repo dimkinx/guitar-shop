@@ -1,6 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
-import {ActionType, StatusType} from '../../enums';
 import {Product} from '../../types/product';
+import {ActionType, StatusType} from '../../common/enums';
 
 const setFoundProducts = createAction(
   ActionType.SetFoundProducts,

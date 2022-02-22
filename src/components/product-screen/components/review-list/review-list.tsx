@@ -3,8 +3,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {fetchReviews} from '../../../../store/reviews/reviews-api-actions';
 import {getReviews, getReviewsTotalCount, isReviewsFailure, isReviewsIdle, isReviewsLoading, isReviewsSuccess} from '../../../../store/reviews/reviews-selectors';
 import {Rate} from '../../../shared/shared';
-import {addClassModifier} from '../../../../utils';
-import {APP_LOCALE, REVIEWS_COUNT_PER_STEP} from '../../../../constants';
+import {addClassModifier} from '../../../../utils/utils';
+import {APP_LOCALE, REVIEWS_COUNT_PER_STEP} from '../../../../common/constants';
 
 type ReviewListProps = {
   productId: number;

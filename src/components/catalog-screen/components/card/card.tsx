@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import {Rate} from '../../../shared/shared';
-import {APP_LOCALE, AppRoute} from '../../../../constants';
+import {APP_LOCALE, AppRoute} from '../../../../common/constants';
 import {Product} from '../../../../types/product';
 
 type ProductCardProps = {

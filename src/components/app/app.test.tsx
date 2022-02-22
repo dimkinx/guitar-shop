@@ -7,8 +7,8 @@ import App from './app';
 import {createMockProduct, createMockProducts} from '../../mocks/products';
 import {createMockReviews} from '../../mocks/reviews';
 import 'intersection-observer';
-import {AppRoute, Namespace} from '../../constants';
-import {StatusType} from '../../enums';
+import {AppRoute, Namespace} from '../../common/constants';
+import {StatusType} from '../../common/enums';
 
 const mockStore = configureMockStore();
 const history = createMemoryHistory();

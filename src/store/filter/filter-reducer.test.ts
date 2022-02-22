@@ -1,6 +1,6 @@
 import {filterInitialState, filterReducer} from './filter-reducer';
 import {setPriceRangeMax, setPriceRangeMin, setPriceRangeStatus} from './filter-actions';
-import {StatusType} from '../../enums';
+import {StatusType} from '../../common/enums';
 import {datatype} from 'faker';
 
 const mockActionType = 'UNKNOWN_ACTION';

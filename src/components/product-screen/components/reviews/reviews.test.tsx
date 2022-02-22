@@ -5,8 +5,8 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import {createMemoryHistory} from 'history';
 import Reviews from './reviews';
 import {createMockProduct} from '../../../../mocks/products';
-import {StatusType} from '../../../../enums';
-import {Namespace} from '../../../../constants';
+import {StatusType} from '../../../../common/enums';
+import {Namespace} from '../../../../common/constants';
 import 'intersection-observer';
 
 const mockProduct = createMockProduct();

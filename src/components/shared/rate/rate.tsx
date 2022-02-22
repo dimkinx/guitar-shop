@@ -1,6 +1,6 @@
 import {ReactNode} from 'react';
-import {createIndexList} from '../../../utils';
-import {MAX_STARS_COUNT} from '../../../constants';
+import {createIndexList} from '../../../utils/utils';
+import {MAX_STARS_COUNT} from '../../../common/constants';
 
 type RateProps = {
   className: string;

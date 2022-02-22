@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import {ActionType, StatusType} from '../../enums';
+import {ActionType, StatusType} from '../../common/enums';
 
 const setPriceRangeMin = createAction(
   ActionType.SetPriceRangeMin,

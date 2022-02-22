@@ -1,9 +1,9 @@
 import {ReactNode, ReactPortal, useCallback, useEffect, useRef, useState} from 'react';
 import {createPortal} from 'react-dom';
 import {CSSTransition} from 'react-transition-group';
-import {FOCUS_TIMEOUT, KeyAttributeValue, TRANSITION_DELAY} from '../../../constants';
 import FocusLock from 'react-focus-lock';
-import {getFocusableElements} from '../../../utils';
+import {getFocusableElements} from '../../../utils/utils';
+import {FOCUS_TIMEOUT, KeyAttributeValue, TRANSITION_DELAY} from '../../../common/constants';
 
 type ModalProps = {
   isModalOpen: boolean;

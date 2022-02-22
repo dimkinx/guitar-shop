@@ -1,7 +1,7 @@
 import {reviewsInitialState, reviewsReducer} from './reviews-reducer';
 import {createMockReview, createMockReviews} from '../../mocks/reviews';
 import {setReview, setReviews, setReviewsStatus, setReviewStatus, setReviewsTotalCount} from './reviews-actions';
-import {StatusType} from '../../enums';
+import {StatusType} from '../../common/enums';
 
 const mockActionType = 'UNKNOWN_ACTION';
 const mockReview = createMockReview();

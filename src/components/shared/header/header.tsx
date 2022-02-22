@@ -1,7 +1,7 @@
 import {NavLink, Link} from 'react-router-dom';
 import Logo from '../logo/logo';
 import SearchForm from '../search-form/search-form';
-import {AppRoute} from '../../../constants';
+import {AppRoute} from '../../../common/constants';
 
 function Header(): JSX.Element {
   return (

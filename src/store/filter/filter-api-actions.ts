@@ -1,10 +1,10 @@
 import {toast} from 'react-toastify';
 import {ThunkActionResult} from '../../types/thunk-action';
 import {setPriceRangeMin, setPriceRangeMax, setPriceRangeStatus} from './filter-actions';
-import {OrderType, SortType, StatusType} from '../../enums';
+import {OrderType, SortType, StatusType} from '../../common/enums';
 import {Product} from '../../types/product';
-import {APIRoute, ErrorMessage, SearchParamPostfix} from '../../constants';
-import {mergeSearchParams} from '../../utils';
+import {APIRoute, ErrorMessage, SearchParamPostfix} from '../../common/constants';
+import {mergeSearchParams} from '../../utils/utils';
 
 const fetchPriceRange = (searchParams: URLSearchParams): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {

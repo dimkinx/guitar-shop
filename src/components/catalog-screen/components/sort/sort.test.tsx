@@ -2,7 +2,7 @@ import {Provider} from 'react-redux';
 import {render, screen} from '@testing-library/react';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import Sort from './sort';
-import {Namespace} from '../../../../constants';
+import {Namespace} from '../../../../common/constants';
 
 const mockStore = configureMockStore();
 

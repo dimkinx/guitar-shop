@@ -1,9 +1,9 @@
 import {toast} from 'react-toastify';
 import {ThunkActionResult} from '../../types/thunk-action';
 import {setFetchedReviews, setReview, setReviewsStatus, setReviewStatus, setReviewsTotalCount} from './reviews-actions';
-import {OrderType, SortType, StatusType} from '../../enums';
-import {APIRoute, ErrorMessage, SearchParamPostfix, RESPONSE_HEADER_X_TOTAL_COUNT, REVIEWS_COUNT_PER_STEP} from '../../constants';
 import {Review, ReviewPost} from '../../types/review';
+import {OrderType, SortType, StatusType} from '../../common/enums';
+import {APIRoute, ErrorMessage, SearchParamPostfix, RESPONSE_HEADER_X_TOTAL_COUNT, REVIEWS_COUNT_PER_STEP} from '../../common/constants';
 
 const fetchReviews = (productId: number, reviewId = 0): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {

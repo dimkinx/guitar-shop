@@ -3,7 +3,7 @@ import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
 import Card from './card';
 import {createMockProduct} from '../../../../mocks/products';
-import {APP_LOCALE} from '../../../../constants';
+import {APP_LOCALE} from '../../../../common/constants';
 
 const history = createMemoryHistory();
 const mockProduct = createMockProduct();

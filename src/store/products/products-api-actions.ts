@@ -1,10 +1,10 @@
 import {toast} from 'react-toastify';
 import {ThunkActionResult} from '../../types/thunk-action';
 import {setProducts, setProductsStatus, setProductsTotalCount} from './products-actions';
-import {StatusType} from '../../enums';
 import {Product} from '../../types/product';
-import {APIRoute, Namespace, ErrorMessage, SearchParamPostfix, RESPONSE_HEADER_X_TOTAL_COUNT} from '../../constants';
-import {mergeSearchParams} from '../../utils';
+import {mergeSearchParams} from '../../utils/utils';
+import {StatusType} from '../../common/enums';
+import {APIRoute, Namespace, ErrorMessage, SearchParamPostfix, RESPONSE_HEADER_X_TOTAL_COUNT} from '../../common/constants';
 
 const fetchProducts = (searchParams: URLSearchParams): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {

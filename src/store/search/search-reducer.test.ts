@@ -1,7 +1,7 @@
 import {searchInitialState, searchReducer} from './search-reducer';
 import {setFoundProducts, setFoundProductsStatus} from './search-actions';
 import {createMockProducts} from '../../mocks/products';
-import {StatusType} from '../../enums';
+import {StatusType} from '../../common/enums';
 
 const mockActionType = 'UNKNOWN_ACTION';
 const mockProducts = createMockProducts();

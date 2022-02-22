@@ -2,8 +2,8 @@ import {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {Link, useHistory, useLocation, useParams} from 'react-router-dom';
 import {getProductsTotalCount, isProductsSuccess} from '../../../store/products/products-selectors';
-import {addClassModifier, createIndexList} from '../../../utils';
-import {AppRoute, PRODUCTS_COUNT_PER_PAGE} from '../../../constants';
+import {addClassModifier, createIndexList} from '../../../utils/utils';
+import {AppRoute, PRODUCTS_COUNT_PER_PAGE} from '../../../common/constants';
 
 function Pagination(): JSX.Element {
   const history = useHistory();

@@ -1,6 +1,6 @@
 import {MouseEvent} from 'react';
 import {Link, useLocation} from 'react-router-dom';
-import {AppRoute} from '../../../constants';
+import {AppRoute} from '../../../common/constants';
 
 type LogoProps = {
   className?: string;

@@ -7,8 +7,8 @@ import {setFetchedReviews, setReview, setReviewsStatus, setReviewStatus, setRevi
 import {fetchReviews, postReview} from './reviews-api-actions';
 import {State} from '../../types/state';
 import {createMockReview, createMockReviews} from '../../mocks/reviews';
-import {APIRoute, RESPONSE_HEADER_X_TOTAL_COUNT} from '../../constants';
-import {StatusType} from '../../enums';
+import {StatusType} from '../../common/enums';
+import {APIRoute, RESPONSE_HEADER_X_TOTAL_COUNT} from '../../common/constants';
 
 const api = createAPI();
 const mockAPI = new MockAdapter(api);

@@ -4,8 +4,8 @@ import {render, screen} from '@testing-library/react';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {createMemoryHistory} from 'history';
 import Filter from './filter';
-import {Namespace} from '../../../../constants';
-import {StatusType} from '../../../../enums';
+import {Namespace} from '../../../../common/constants';
+import {StatusType} from '../../../../common/enums';
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore();

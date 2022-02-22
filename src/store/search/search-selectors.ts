@@ -1,7 +1,7 @@
+import {createSelector} from 'reselect';
 import {State} from '../../types/state';
 import {Product} from '../../types/product';
-import {StatusType} from '../../enums';
-import {createSelector} from 'reselect';
+import {StatusType} from '../../common/enums';
 
 const getFoundProducts = (state: State): Product[] => state.search.foundProducts;
 const getFoundProductsStatus = (state: State): StatusType => state.search.status;

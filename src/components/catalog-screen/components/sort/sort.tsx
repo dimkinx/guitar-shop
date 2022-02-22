@@ -1,9 +1,9 @@
 import {MouseEvent} from 'react';
-import {SortType, OrderType} from '../../../../enums';
 import {useDispatch, useSelector} from 'react-redux';
-import {addClassModifier} from '../../../../utils';
 import {setOrderType, setSortType} from '../../../../store/sort/sort-actions';
 import {getOrderType, getSortType} from '../../../../store/sort/sort-selectors';
+import {addClassModifier} from '../../../../utils/utils';
+import {SortType, OrderType} from '../../../../common/enums';
 
 function Sort(): JSX.Element {
   const sortType = useSelector(getSortType);

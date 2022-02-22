@@ -1,7 +1,7 @@
 import {productInitialState, productReducer} from './product-reducer';
 import {createMockProduct} from '../../mocks/products';
 import {setProduct, setProductStatus} from './product-actions';
-import {StatusType} from '../../enums';
+import {StatusType} from '../../common/enums';
 
 const mockActionType = 'UNKNOWN_ACTION';
 const mockProduct = createMockProduct();

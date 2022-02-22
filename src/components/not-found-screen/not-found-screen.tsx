@@ -1,5 +1,5 @@
 import {Link, useLocation} from 'react-router-dom';
-import {AppRoute} from '../../constants';
+import {AppRoute} from '../../common/constants';
 import './style.css';
 
 function NotFoundScreen(): JSX.Element {

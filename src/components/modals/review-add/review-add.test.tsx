@@ -1,10 +1,10 @@
 import {Provider} from 'react-redux';
 import {render, screen} from '@testing-library/react';
-import ReviewForm from './review-form';
+import ReviewAdd from './review-add';
 import {createMockProduct} from '../../../mocks/products';
 import {configureMockStore} from '@jedmao/redux-mock-store';
-import {Namespace} from '../../../constants';
-import {StatusType} from '../../../enums';
+import {StatusType} from '../../../common/enums';
+import {Namespace} from '../../../common/constants';
 
 const onModalOpenSelect = jest.fn();
 const mockProduct = createMockProduct();
@@ -23,7 +23,7 @@ describe('Component: ReviewForm', () => {
   it('should render correctly', () => {
     render(
       <Provider store={store}>
-        <ReviewForm
+        <ReviewAdd
           isModalOpen
           onModalOpenSelect={onModalOpenSelect}
           productId={mockProduct.id}

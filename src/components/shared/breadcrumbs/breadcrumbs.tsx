@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {Link, useLocation, useParams} from 'react-router-dom';
-import {AppRoute} from '../../../constants';
+import {AppRoute} from '../../../common/constants';
 
 type BreadcrumbsProps = {
   productName?: string;

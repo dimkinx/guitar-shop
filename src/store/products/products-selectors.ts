@@ -1,6 +1,6 @@
 import {State} from '../../types/state';
 import {Product} from '../../types/product';
-import {StatusType} from '../../enums';
+import {StatusType} from '../../common/enums';
 import {createSelector} from 'reselect';
 
 const getProducts = (state: State): Product[] => state.products.products;

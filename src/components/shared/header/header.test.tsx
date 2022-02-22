@@ -4,8 +4,8 @@ import {render, screen} from '@testing-library/react';
 import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import Header from './header';
-import {StatusType} from '../../../enums';
-import {Namespace} from '../../../constants';
+import {StatusType} from '../../../common/enums';
+import {Namespace} from '../../../common/constants';
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore();

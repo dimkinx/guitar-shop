@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import {ActionType, OrderType, SortType} from '../../enums';
+import {ActionType, OrderType, SortType} from '../../common/enums';
 
 const setSortType = createAction(
   ActionType.SetSortType,

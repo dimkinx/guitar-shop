@@ -1,7 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {setFoundProducts, setFoundProductsStatus} from './search-actions';
-import {StatusType} from '../../enums';
 import {SearchState} from '../../types/state';
+import {StatusType} from '../../common/enums';
 
 const searchInitialState: SearchState = {
   foundProducts: [],

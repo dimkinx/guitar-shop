@@ -1,6 +1,6 @@
 import {sortInitialState, sortReducer} from './sort-reducer';
 import {setOrderType, setSortType} from './sort-actions';
-import {OrderType, SortType} from '../../enums';
+import {OrderType, SortType} from '../../common/enums';
 
 const mockActionType = 'UNKNOWN_ACTION';
 const mockSortType = SortType.Price;

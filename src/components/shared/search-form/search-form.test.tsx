@@ -6,8 +6,8 @@ import {Router} from 'react-router-dom';
 import SearchForm from './search-form';
 import {createMemoryHistory} from 'history';
 import {createMockProducts} from '../../../mocks/products';
-import {StatusType} from '../../../enums';
-import {Namespace} from '../../../constants';
+import {StatusType} from '../../../common/enums';
+import {Namespace} from '../../../common/constants';
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore();

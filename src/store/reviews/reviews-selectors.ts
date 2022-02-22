@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect';
 import {State} from '../../types/state';
 import {Review} from '../../types/review';
-import {StatusType} from '../../enums';
+import {StatusType} from '../../common/enums';
 
 const getReviews = (state: State): Review[] => state.reviews.reviews;
 const getReviewsTotalCount = (state: State): number => state.reviews.totalCount;
