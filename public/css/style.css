@@ -962,6 +962,7 @@ button,
   display: flex;
   flex-wrap: wrap;
 
+  min-height:286px;
   padding-top: 117px;
   padding-bottom: 31px;
 
@@ -1125,8 +1126,9 @@ button,
   display: flex;
   flex-grow: 1;
   justify-content: start;
+  align-self: end;
 
-  padding-top: 70px;
+  padding-top: 20px;
 }
 
 .modal__button-container .modal__button {
