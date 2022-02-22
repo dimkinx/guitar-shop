@@ -1,4 +1,4 @@
-import {OrderType, SortType, StatusType} from '../enums';
+import {EntityState} from '@reduxjs/toolkit';
 import {Product} from './product';
 import {Review} from './review';
 import {OrderType, SortType, StatusType} from '../common/enums';
@@ -42,6 +42,10 @@ type FilterState = {
   status: StatusType,
 };
 
+type CartState = {
+  products: EntityState<Product>,
+};
+
 type State = {
   [Namespace.Product]: ProductState,
   [Namespace.Reviews]: ReviewsState,
@@ -49,6 +53,17 @@ type State = {
   [Namespace.Search]: SearchState,
   [Namespace.Sort]: SortState,
   [Namespace.Filter]: FilterState,
+  [Namespace.Cart]: CartState,
 };
 
-export type {ProductState, ReviewsState, ProductsState, SearchState, SortState, PriceRangeState, FilterState, State};
+export type {
+  ProductState,
+  ReviewsState,
+  ProductsState,
+  SearchState,
+  SortState,
+  PriceRangeState,
+  FilterState,
+  CartState,
+  State
+};

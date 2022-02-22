@@ -4,8 +4,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getProducts, isProductsFailure, isProductsLoading, isProductsSuccess} from '../../../../store/products/products-selectors';
 import {getOrderType, getSortType} from '../../../../store/sort/sort-selectors';
 import {fetchProducts} from '../../../../store/products/products-api-actions';
-import Card from '../card/card';
 import {ReactComponent as ProductCardSkeleton} from '../../../../assets/skeleton-card.svg';
+import CardList from '../card-list/card-list';
 import {createIndexList} from '../../../../utils/utils';
 import {PRODUCTS_COUNT_PER_PAGE, SearchParamPostfix} from '../../../../common/constants';
 
@@ -48,12 +48,9 @@ function Cards(): JSX.Element {
       )}
       {isSuccess && products.length > 0 &&  (
         <div className="cards catalog__cards" data-testid="success-cards">
-          {isSuccess && products.map((product) => (
-            <Card
-              key={product.id}
-              product={product}
-            />
-          ))}
+          {isSuccess && (
+            <CardList />
+          )}
         </div>
       )}
       {isSuccess && products.length === 0 && (

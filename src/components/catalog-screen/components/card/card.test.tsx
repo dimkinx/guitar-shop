@@ -12,7 +12,11 @@ describe('Component: Card', () => {
   it('should render correctly', () => {
     render(
       <Router history={history}>
-        <Card product={mockProduct} />
+        <Card
+          onCurrentProductSelect={jest.fn}
+          onModalCartAddOpenClick={jest.fn}
+          product={mockProduct}
+        />
       </Router>);
 
     expect(screen.getByAltText(new RegExp(mockProduct.name,'i'))).toBeInTheDocument();

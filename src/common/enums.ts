@@ -25,6 +25,7 @@ const enum ActionType {
   SetPriceRangeMin = 'filter/setPriceRangeMin',
   SetPriceRangeMax = 'filter/setPriceRangeMax',
   SetPriceRangeStatus = 'filter/setPriceRangeStatus',
+  AddProductToCart = 'cart/addProductToCart',
 }
 
 const enum SortType {

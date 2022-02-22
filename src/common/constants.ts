@@ -53,6 +53,7 @@ const Namespace = {
   Search: 'search',
   Sort: 'sort',
   Filter: 'filter',
+  Cart: 'cart',
 } as const;
 
 const ToastParam = {
@@ -86,7 +87,7 @@ const LoaderParam = {
 } as const;
 
 const GuitarTypeTranslation = {
-  Acoustic: 'Акустические гитара',
+  Acoustic: 'Акустическая гитара',
   Electric: 'Электрогитара',
   Ukulele: 'Укулеле',
 } as const;
