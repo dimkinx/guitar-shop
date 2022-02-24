@@ -1,3 +1,4 @@
+import {EntityId} from '@reduxjs/toolkit';
 import {Review} from './review';
 
 type Product = {
@@ -10,8 +11,12 @@ type Product = {
   stringCount: number;
   rating: number;
   price: number;
-  count?: number;
   comments?: Review[];
 }
 
-export type {Product};
+type ProductInCart = Product & {
+  id: EntityId;
+  count: number;
+}
+
+export type {Product, ProductInCart};

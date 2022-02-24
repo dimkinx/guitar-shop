@@ -1,5 +1,5 @@
 import {EntityState} from '@reduxjs/toolkit';
-import {Product} from './product';
+import {Product, ProductInCart} from './product';
 import {Review} from './review';
 import {OrderType, SortType, StatusType} from '../common/enums';
 import {Namespace} from '../common/constants';
@@ -43,7 +43,7 @@ type FilterState = {
 };
 
 type CartState = {
-  products: EntityState<Product>,
+  products: EntityState<ProductInCart>,
 };
 
 type State = {

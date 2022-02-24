@@ -18,7 +18,7 @@ function CartAddSuccess({isModalOpen, onModalOpenSelect}: CartAddSuccessProps): 
     }, FOCUS_TIMEOUT + TRANSITION_DELAY);
   };
 
-  const handleContinueShoppingButtonClick = () => {
+  const handleContinueButtonClick = () => {
     onModalOpenSelect(false);
   };
 
@@ -39,7 +39,7 @@ function CartAddSuccess({isModalOpen, onModalOpenSelect}: CartAddSuccessProps): 
         >Перейти в корзину
         </button>
         <button
-          onClick={handleContinueShoppingButtonClick}
+          onClick={handleContinueButtonClick}
           className="button button--black-border button--small modal__button modal__button--right"
         >Продолжить покупки
         </button>

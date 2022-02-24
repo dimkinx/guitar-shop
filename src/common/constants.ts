@@ -92,6 +92,11 @@ const GuitarTypeTranslation = {
   Ukulele: 'Укулеле',
 } as const;
 
+const ProductInCartCountRange = {
+  Min: 1,
+  Max: 99,
+} as const;
+
 export {
   APP_LOCALE,
   MAX_STARS_COUNT,
@@ -112,5 +117,6 @@ export {
   ErrorMessage,
   KeyAttributeValue,
   LoaderParam,
-  GuitarTypeTranslation
+  GuitarTypeTranslation,
+  ProductInCartCountRange
 };

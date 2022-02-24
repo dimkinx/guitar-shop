@@ -1,31 +1,26 @@
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
+import {deleteProductInCart} from '../../../store/cart/cart-actions';
 import Modal from '../modal/modal';
-import {createProductInCart, updateProductInCart} from '../../../store/cart/cart-actions';
-import {getProductInCart} from '../../../store/cart/cart-selectors';
-import {Product} from '../../../types/product';
+import {ProductInCart} from '../../../types/product';
 import {GuitarType} from '../../../common/enums';
 import {GuitarTypeToTranslationMap} from '../../../common/collections';
 import {APP_LOCALE} from '../../../common/constants';
 
-type CartAddProps = {
+type CartDeleteProps = {
   isModalOpen: boolean;
   onModalOpenSelect: (isOpen: boolean) => void;
-  onAddToCartButtonClick: (isProductAddedToCart: boolean) => void;
-  product: Product | null;
+  product: ProductInCart | null;
 }
 
-function CartAdd({isModalOpen, onModalOpenSelect, onAddToCartButtonClick, product}: CartAddProps): JSX.Element {
-  const productInCart = useSelector(getProductInCart(product ? product.id : 0));
+function CartDelete({isModalOpen, onModalOpenSelect, product}: CartDeleteProps): JSX.Element {
   const dispatch = useDispatch();
 
-  const handleButtonClick = () => {
-    if (product) {
-      productInCart
-        ? dispatch(updateProductInCart(product.id, productInCart.count + 1))
-        : dispatch(createProductInCart(product));
-    }
+  const handleDeleteButtonClick = () => {
+    product && dispatch(deleteProductInCart(product.id));
+    onModalOpenSelect(false);
+  };
 
-    onAddToCartButtonClick(true);
+  const handleContinueButtonClick = () => {
     onModalOpenSelect(false);
   };
 
@@ -34,7 +29,7 @@ function CartAdd({isModalOpen, onModalOpenSelect, onAddToCartButtonClick, produc
       isModalOpen={isModalOpen}
       onModalOpenSelect={onModalOpenSelect}
     >
-      <h2 className="modal__header title title--medium">Добавить товар в корзину</h2>
+      <h2 className="modal__header title title--medium title--red">Удалить этот товар?</h2>
       {product && (
         <div className="modal__info">
           <img
@@ -61,13 +56,18 @@ function CartAdd({isModalOpen, onModalOpenSelect, onAddToCartButtonClick, produc
       )}
       <div className="modal__button-container">
         <button
-          onClick={handleButtonClick}
-          className="button button--red button--big modal__button modal__button--add"
-        >Добавить в корзину
+          onClick={handleDeleteButtonClick}
+          className="button button--small modal__button"
+        >Удалить товар
+        </button>
+        <button
+          onClick={handleContinueButtonClick}
+          className="button button--black-border button--small modal__button modal__button--right"
+        >Продолжить покупки
         </button>
       </div>
     </Modal>
   );
 }
 
-export default CartAdd;
+export default CartDelete;
