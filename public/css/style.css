@@ -1207,6 +1207,10 @@ button,
   color: #c90606;
 }
 
+.title--center {
+  text-align: center;
+}
+
 .catalog {
   display: grid;
   align-content: start;
