@@ -12,7 +12,15 @@ const cartInitialState: CartState = {
 const cartReducer = createReducer(cartInitialState, (builder) => {
   builder
     .addCase(addProductToCart, (state, action) => {
+      const product: Product | undefined = productsAdapter
+        .getSelectors()
+        .selectById(state.products, action.payload.product.id);
+
       productsAdapter.addOne(state.products, action.payload.product);
+      productsAdapter.updateOne(state.products, {
+        id: action.payload.product.id,
+        changes: {count: product?.count ? product.count + 1 : 1},
+      });
     });
 });
 

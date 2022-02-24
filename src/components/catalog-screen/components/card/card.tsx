@@ -1,7 +1,7 @@
 import {MouseEvent} from 'react';
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import {isProductAdded} from '../../../../store/cart/cart-selectors';
+import {isProductInCart} from '../../../../store/cart/cart-selectors';
 import {Rate} from '../../../shared/shared';
 import {Product} from '../../../../types/product';
 import {APP_LOCALE, AppRoute} from '../../../../common/constants';
@@ -14,7 +14,7 @@ type ProductCardProps = {
 
 function Card({product, onModalCartAddOpenClick, onCurrentProductSelect}: ProductCardProps): JSX.Element {
   const {id, name, previewImg, rating, price, comments} = product;
-  const isProductAddedToCart = useSelector(isProductAdded(id));
+  const isProductAddedToCart = useSelector(isProductInCart(id));
 
   const handleAddToCartLinkClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     if (!isProductAddedToCart) {

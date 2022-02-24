@@ -10,6 +10,7 @@ type Product = {
   stringCount: number;
   rating: number;
   price: number;
+  count?: number;
   comments?: Review[];
 }
 

@@ -5,13 +5,20 @@ import {Product} from '../../types/product';
 
 const {
   selectById: selectProductById,
+  selectAll: selectAllProducts,
 } = productsAdapter.getSelectors((state: State) => state.cart.products);
 
-const selectProduct = (id: number) => (state: State): Product | undefined => selectProductById(state, id);
+const getProductFromCart = (id: number) => (state: State): Product | undefined => selectProductById(state, id);
+const getProductsFromCart = (state: State): Product[] => selectAllProducts(state);
 
-const isProductAdded = (id: number) => createSelector(
-  selectProduct(id),
+const isProductInCart = (id: number) => createSelector(
+  getProductFromCart(id),
   (product: Product | undefined): boolean => Boolean(product),
 );
 
-export {isProductAdded};
+const getProductsCountInCart = createSelector(
+  getProductsFromCart,
+  (products: Product[]): number => products.reduce((sum, {count}) => sum + Number(count), 0),
+);
+
+export {isProductInCart, getProductsCountInCart};

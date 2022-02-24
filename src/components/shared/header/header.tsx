@@ -1,9 +1,13 @@
-import {NavLink, Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
+import {useSelector} from 'react-redux';
+import {getProductsCountInCart} from '../../../store/cart/cart-selectors';
 import Logo from '../logo/logo';
 import SearchForm from '../search-form/search-form';
 import {AppRoute} from '../../../common/constants';
 
 function Header(): JSX.Element {
+  const productsCountInCart = useSelector(getProductsCountInCart);
+
   return (
     <header className="header" id="header">
       <div className="container header__wrapper">
@@ -35,9 +39,10 @@ function Header(): JSX.Element {
           </ul>
         </nav>
         <SearchForm />
-        <Link
+        <NavLink
           to={AppRoute.CartScreen}
           className="header__cart-link"
+          activeClassName="link--current"
           aria-label="Корзина"
         >
           <svg
@@ -49,8 +54,8 @@ function Header(): JSX.Element {
             <use xlinkHref="#icon-basket" />
           </svg>
           <span className="visually-hidden">Перейти в корзину</span>
-          <span className="header__cart-count">2</span>
-        </Link>
+          {Boolean(productsCountInCart) && <span className="header__cart-count">{productsCountInCart}</span>}
+        </NavLink>
       </div>
     </header>
   );
