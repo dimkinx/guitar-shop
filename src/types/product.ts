@@ -12,11 +12,11 @@ type Product = {
   rating: number;
   price: number;
   comments?: Review[];
-}
+};
 
 type ProductInCart = Product & {
   id: EntityId;
   count: number;
-}
+};
 
 export type {Product, ProductInCart};
