@@ -757,11 +757,12 @@ button,
 
 .header__cart-count {
   top: -5px;
-  right: -14px;
+  left: 16px;
   position: absolute;
 
-  width: 12px;
+  min-width: 12px;
   height: 12px;
+  padding: 0 3px;
 
   font-family: "Droid Sans", "Arial", sans-serif;
   font-size: 10px;
@@ -2762,7 +2763,8 @@ button,
   pointer-events: none;
 }
 
-.reviews__icon-loader {
+.reviews__icon-loader,
+.coupon__icon-loader{
   top: 50%;
   left: 50%;
   position: absolute;
@@ -3244,13 +3246,23 @@ button,
 }
 
 .coupon__button {
+  position: relative;
+
   min-width: 180px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  min-height: 40px;
+  padding: 8px 0;
 
   border-radius: 0 2px 2px 0;
 
   letter-spacing: 0.05em;
+}
+
+.coupon__button:disabled {
+  pointer-events: none;
+}
+
+.coupon__button:disabled:hover {
+  background-color: #131212;
 }
 
 @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
