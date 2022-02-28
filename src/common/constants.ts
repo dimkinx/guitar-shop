@@ -14,6 +14,7 @@ const APIRoute = {
   GetProduct: (id: number) => `/guitars/${id}`,
   GetReviews: (id: number) => `/guitars/${id}/comments`,
   PostReview: () => '/comments',
+  PostCoupon: () => '/coupons',
 } as const;
 
 const AppRoute = {
@@ -69,6 +70,7 @@ const ErrorMessage = {
   FailedToLoadProducts: 'Не удалось загрузить запрашиваемые товары',
   FailedToLoadSearchRequest: 'Не удалось загрузить поисковый запрос',
   FailedToLoadPriceRangeRequest: 'Не удалось загрузить диапазон цен для фильтра',
+  FailedToPostCouponRequest: 'Не удалось отправить промокод',
 } as const;
 
 const KeyAttributeValue = {

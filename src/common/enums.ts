@@ -28,6 +28,10 @@ const enum ActionType {
   CreateProductInCart = 'cart/createProductInCart',
   UpdateProductInCart = 'cart/updateProductInCart',
   DeleteProductInCart = 'cart/deleteProductInCart',
+  SetCouponPostStatus = 'cart/setCouponPostStatus',
+  SetCouponValidityStatus = 'cart/setCouponValidityStatus',
+  SetCoupon = 'cart/setCoupon',
+  SetDiscount = 'cart/setDiscount',
 }
 
 const enum SortType {
@@ -60,4 +64,10 @@ const enum EssenceType {
   StateMap = 'stateMap',
 }
 
-export {StatusType, ActionType, SortType, OrderType, GuitarType, StringCountType, EssenceType};
+const enum CouponValidityType {
+  Valid = 'valid',
+  Invalid = 'invalid',
+  Unknown = 'unknown',
+}
+
+export {StatusType, ActionType, SortType, OrderType, GuitarType, StringCountType, EssenceType, CouponValidityType};

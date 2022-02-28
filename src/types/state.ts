@@ -1,7 +1,8 @@
 import {EntityState} from '@reduxjs/toolkit';
 import {Product, ProductInCart} from './product';
 import {Review} from './review';
-import {OrderType, SortType, StatusType} from '../common/enums';
+import {Coupon, Discount} from './coupon';
+import {CouponValidityType, OrderType, SortType, StatusType} from '../common/enums';
 import {Namespace} from '../common/constants';
 
 type ProductState = {
@@ -44,6 +45,10 @@ type FilterState = {
 
 type CartState = {
   products: EntityState<ProductInCart>;
+  couponPostStatus: StatusType;
+  couponValidityStatus: CouponValidityType;
+  coupon: Coupon;
+  discount: Discount;
 };
 
 type State = {

@@ -1,7 +1,4 @@
 type Coupon = string;
+type Discount = number;
 
-type CouponPost = {
-  coupon: Coupon;
-};
-
-export type {Coupon, CouponPost};
+export type {Coupon, Discount};

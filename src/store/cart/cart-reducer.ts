@@ -1,12 +1,25 @@
 import {createEntityAdapter, createReducer, EntityAdapter} from '@reduxjs/toolkit';
-import {createProductInCart, updateProductInCart, deleteProductInCart} from './cart-actions';
+import {
+  createProductInCart,
+  updateProductInCart,
+  deleteProductInCart,
+  setCouponPostStatus,
+  setCouponValidityStatus,
+  setCoupon,
+  setDiscount
+} from './cart-actions';
 import {CartState} from '../../types/state';
 import {ProductInCart} from '../../types/product';
+import {CouponValidityType, StatusType} from '../../common/enums';
 
 const productsAdapter: EntityAdapter<ProductInCart> = createEntityAdapter();
 
 const cartInitialState: CartState = {
   products: productsAdapter.getInitialState(),
+  couponPostStatus: StatusType.Idle,
+  couponValidityStatus: CouponValidityType.Unknown,
+  coupon: '',
+  discount: 0,
 };
 
 const cartReducer = createReducer(cartInitialState, (builder) => {
@@ -22,6 +35,18 @@ const cartReducer = createReducer(cartInitialState, (builder) => {
     })
     .addCase(deleteProductInCart, (state, action) => {
       productsAdapter.removeOne(state.products, action.payload.productId);
+    })
+    .addCase(setCouponPostStatus, (state, action) => {
+      state.couponPostStatus = action.payload.postStatus;
+    })
+    .addCase(setCouponValidityStatus, (state, action) => {
+      state.couponValidityStatus = action.payload.validityStatus;
+    })
+    .addCase(setCoupon, (state, action) => {
+      state.coupon = action.payload.coupon;
+    })
+    .addCase(setDiscount, (state, action) => {
+      state.discount = action.payload.discount;
     });
 });
 
