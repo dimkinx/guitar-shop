@@ -1,7 +1,7 @@
 import {createEntityAdapter, createReducer, EntityAdapter} from '@reduxjs/toolkit';
 import {
   createProductInCart,
-  updateProductInCart,
+  updateProductCountInCart,
   deleteProductInCart,
   setCouponPostStatus,
   setCouponValidityStatus,
@@ -27,7 +27,7 @@ const cartReducer = createReducer(cartInitialState, (builder) => {
     .addCase(createProductInCart, (state, action) => {
       productsAdapter.addOne(state.products, Object.assign({}, action.payload.product, {count: 1}));
     })
-    .addCase(updateProductInCart, (state, action) => {
+    .addCase(updateProductCountInCart, (state, action) => {
       productsAdapter.updateOne(state.products, {
         id: action.payload.productId,
         changes: {count: action.payload.count},
@@ -50,4 +50,4 @@ const cartReducer = createReducer(cartInitialState, (builder) => {
     });
 });
 
-export {productsAdapter, cartReducer};
+export {productsAdapter, cartInitialState, cartReducer};

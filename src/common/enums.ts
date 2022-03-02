@@ -26,7 +26,7 @@ const enum ActionType {
   SetPriceRangeMax = 'filter/setPriceRangeMax',
   SetPriceRangeStatus = 'filter/setPriceRangeStatus',
   CreateProductInCart = 'cart/createProductInCart',
-  UpdateProductInCart = 'cart/updateProductInCart',
+  UpdateProductCountInCart = 'cart/updateProductCountInCart',
   DeleteProductInCart = 'cart/deleteProductInCart',
   SetCouponPostStatus = 'cart/setCouponPostStatus',
   SetCouponValidityStatus = 'cart/setCouponValidityStatus',

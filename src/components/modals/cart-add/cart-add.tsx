@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from 'react-redux';
 import Modal from '../modal/modal';
-import {createProductInCart, updateProductInCart} from '../../../store/cart/cart-actions';
+import {createProductInCart, updateProductCountInCart} from '../../../store/cart/cart-actions';
 import {getProductInCart} from '../../../store/cart/cart-selectors';
 import {Product} from '../../../types/product';
 import {GuitarType} from '../../../common/enums';
@@ -21,7 +21,7 @@ function CartAdd({isModalOpen, onModalOpenSelect, onAddToCartButtonClick, produc
   const handleButtonClick = () => {
     if (product) {
       productInCart
-        ? dispatch(updateProductInCart(product.id, productInCart.count + 1))
+        ? dispatch(updateProductCountInCart(product.id, productInCart.count + 1))
         : dispatch(createProductInCart(product));
     }
 

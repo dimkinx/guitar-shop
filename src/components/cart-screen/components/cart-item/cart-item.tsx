@@ -1,6 +1,6 @@
 import {FormEvent, KeyboardEvent, useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {updateProductInCart} from '../../../../store/cart/cart-actions';
+import {updateProductCountInCart} from '../../../../store/cart/cart-actions';
 import {ProductInCart} from '../../../../types/product';
 import {GuitarType} from '../../../../common/enums';
 import {GuitarTypeToTranslationMap} from '../../../../common/collections';
@@ -33,13 +33,13 @@ function CartItem({onModalCartDeleteOpenClick, onCurrentProductSelect, product}:
       return;
     }
 
-    dispatch(updateProductInCart(id, count - 1));
+    dispatch(updateProductCountInCart(id, count - 1));
     setValidCount(count - 1);
   };
 
   const handleIncrementButtonClick = () => {
     setIsIncrementButtonDisabled(false);
-    dispatch(updateProductInCart(id, count + 1));
+    dispatch(updateProductCountInCart(id, count + 1));
     setValidCount(count + 1);
   };
 
@@ -66,7 +66,7 @@ function CartItem({onModalCartDeleteOpenClick, onCurrentProductSelect, product}:
   };
 
   const handleCountInputBlur = () => {
-    dispatch(updateProductInCart(id, validCount));
+    dispatch(updateProductCountInCart(id, validCount));
   };
 
   useEffect(() => {

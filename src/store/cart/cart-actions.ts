@@ -12,8 +12,8 @@ const createProductInCart = createAction(
   }),
 );
 
-const updateProductInCart = createAction(
-  ActionType.UpdateProductInCart,
+const updateProductCountInCart = createAction(
+  ActionType.UpdateProductCountInCart,
   (productId: number, count: number) => ({
     payload: {
       productId,
@@ -69,7 +69,7 @@ const setDiscount = createAction(
 
 export {
   createProductInCart,
-  updateProductInCart,
+  updateProductCountInCart,
   deleteProductInCart,
   setCouponPostStatus,
   setCouponValidityStatus,
