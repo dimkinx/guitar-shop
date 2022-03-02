@@ -8,6 +8,7 @@ import ProductScreen from './product-screen';
 import {Namespace} from '../../common/constants';
 import {StatusType} from '../../common/enums';
 import 'intersection-observer';
+import {productsAdapter} from '../../store/cart/cart-reducer';
 
 const mockProduct = createMockProduct();
 const mockStore = configureMockStore();
@@ -27,6 +28,9 @@ const store = mockStore({
   [Namespace.Search]: {
     foundProducts: [],
     status: StatusType.Idle,
+  },
+  [Namespace.Cart]: {
+    products: productsAdapter.getInitialState(),
   },
 });
 

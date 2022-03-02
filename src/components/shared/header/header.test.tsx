@@ -6,6 +6,7 @@ import {createMemoryHistory} from 'history';
 import Header from './header';
 import {StatusType} from '../../../common/enums';
 import {Namespace} from '../../../common/constants';
+import {productsAdapter} from '../../../store/cart/cart-reducer';
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore();
@@ -14,6 +15,9 @@ const store = mockStore({
   [Namespace.Search]: {
     foundProducts: [],
     status: StatusType.Idle,
+  },
+  [Namespace.Cart]: {
+    products: productsAdapter.getInitialState(),
   },
 });
 

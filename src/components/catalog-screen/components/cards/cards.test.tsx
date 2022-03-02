@@ -7,6 +7,7 @@ import Cards from './cards';
 import {createMockProducts} from '../../../../mocks/products';
 import {Namespace} from '../../../../common/constants';
 import {StatusType} from '../../../../common/enums';
+import {productsAdapter} from '../../../../store/cart/cart-reducer';
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore();
@@ -22,6 +23,9 @@ const loadingStore = mockStore({
     sortType: null,
     orderType: null,
   },
+  [Namespace.Cart]: {
+    products: productsAdapter.getInitialState(),
+  },
 });
 
 const successStore = mockStore({
@@ -34,6 +38,9 @@ const successStore = mockStore({
     sortType: null,
     orderType: null,
   },
+  [Namespace.Cart]: {
+    products: productsAdapter.getInitialState(),
+  },
 });
 
 const emptyStore = mockStore({
@@ -45,6 +52,9 @@ const emptyStore = mockStore({
   [Namespace.Sort]: {
     sortType: null,
     orderType: null,
+  },
+  [Namespace.Cart]: {
+    products: productsAdapter.getInitialState(),
   },
 });
 
