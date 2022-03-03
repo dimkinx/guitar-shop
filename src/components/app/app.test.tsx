@@ -85,6 +85,13 @@ describe('Application Routing', () => {
     expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(new RegExp(mockProduct.name,'i'));
   });
 
+  it('should render "CartScreen" when user navigate to "/cart"', () => {
+    history.push(AppRoute.CartScreen);
+    render(FakeApp);
+
+    expect(screen.getByRole('heading', {level: 1})).toHaveTextContent(/Корзина/i);
+  });
+
   it('should render "NotFoundScreen" when user navigate to non-existent route', () => {
     history.push('/non-existent-route');
     render(FakeApp);

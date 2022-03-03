@@ -19,7 +19,7 @@ const store = mockStore({
   },
 });
 
-describe('Component: ReviewForm', () => {
+describe('Component: ReviewAdd', () => {
   it('should render correctly', () => {
     render(
       <Provider store={store}>

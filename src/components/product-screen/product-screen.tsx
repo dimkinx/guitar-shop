@@ -28,21 +28,21 @@ function ProductScreen(): JSX.Element {
   const reviewsCount = useSelector(getReviewsTotalCount);
   const isReviewsSuccessStatus = useSelector(isReviewsSuccess);
 
-  const [isProductAddedToCart, setIsProductAddedToCart] = useState<boolean>(false);
+  const [isProductAdded, setIsProductAdded] = useState<boolean>(false);
   const [isModalCartAddOpen, setIsModalCartAddOpen] = useState<boolean>(false);
   const [isModalCartAddSuccessOpen, setIsModalCartAddSuccessOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    if (isProductAddedToCart) {
+    if (isProductAdded) {
       setTimeout(() => {
         setIsModalCartAddSuccessOpen(true);
       }, FOCUS_TIMEOUT + TRANSITION_DELAY);
     }
 
     return () => {
-      setIsProductAddedToCart(false);
+      setIsProductAdded(false);
     };
-  }, [isProductAddedToCart]);
+  }, [isProductAdded]);
 
   const handleAddToCartLinkClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
@@ -152,7 +152,7 @@ function ProductScreen(): JSX.Element {
       <ModalCartAdd
         isModalOpen={isModalCartAddOpen}
         onModalOpenSelect={setIsModalCartAddOpen}
-        onAddToCartButtonClick={setIsProductAddedToCart}
+        onAddToCartButtonClick={setIsProductAdded}
         product={product}
       />
       <ModalCartAddSuccess
