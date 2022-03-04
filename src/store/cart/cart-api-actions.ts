@@ -3,7 +3,7 @@ import {ThunkActionResult} from '../../types/thunk-action';
 import {setCouponPostStatus, setCouponValidityStatus, setDiscount} from './cart-actions';
 import {Coupon, Discount} from '../../types/coupon';
 import {CouponValidityType, StatusType} from '../../common/enums';
-import {APIRoute, ErrorMessage} from '../../common/constants';
+import {APIRoute, ErrorMessage, ResponseStatusCode} from '../../common/constants';
 
 const postCoupon = (couponValue: Coupon): ThunkActionResult => (
   async (dispatch, _getState, api): Promise<void> => {
@@ -16,7 +16,7 @@ const postCoupon = (couponValue: Coupon): ThunkActionResult => (
       })
       .catch(({response}) => {
         dispatch(setCouponPostStatus(StatusType.Failure));
-        if (response && response.status === 400) {
+        if (response && response.status === ResponseStatusCode.BadRequest) {
           dispatch(setCouponValidityStatus(CouponValidityType.Invalid));
           dispatch(setDiscount(0));
         } else {

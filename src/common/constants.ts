@@ -9,6 +9,10 @@ const FOCUS_TIMEOUT = 100;
 const DEBOUNCE_DELAY = 500;
 const TRANSITION_DELAY = 600;
 
+const ResponseStatusCode = {
+  BadRequest: 400,
+} as const;
+
 const APIRoute = {
   GetProducts: () => '/guitars',
   GetProduct: (id: number) => `/guitars/${id}`,
@@ -110,6 +114,7 @@ export {
   FOCUS_TIMEOUT,
   DEBOUNCE_DELAY,
   TRANSITION_DELAY,
+  ResponseStatusCode,
   APIRoute,
   AppRoute,
   SearchParamKey,
