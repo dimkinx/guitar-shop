@@ -20,6 +20,10 @@ function CartAddSuccess({isModalOpen, onModalOpenSelect}: CartAddSuccessProps): 
 
   const handleContinueButtonClick = () => {
     onModalOpenSelect(false);
+
+    setTimeout(() => {
+      history.push(AppRoute.CatalogScreen);
+    }, FOCUS_TIMEOUT + TRANSITION_DELAY);
   };
 
   return (
