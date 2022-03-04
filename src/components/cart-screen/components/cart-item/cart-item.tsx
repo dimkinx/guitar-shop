@@ -15,7 +15,7 @@ type CartItemProps = {
 function CartItem({onModalCartDeleteOpenClick, onCurrentProductSelect, product}: CartItemProps): JSX.Element {
   const {id, name, previewImg, type, vendorCode, stringCount, price, count} = product;
 
-  const [validCount, setValidCount] = useState<number>(count);
+  const [validCount, setValidCount] = useState<number | undefined>(count);
   const [isIncrementButtonDisabled, setIsIncrementButtonDisabled] = useState<boolean>(false);
 
   const dispatch = useDispatch();
@@ -50,6 +50,11 @@ function CartItem({onModalCartDeleteOpenClick, onCurrentProductSelect, product}:
   };
 
   const handleCountInputChange = (evt: FormEvent<HTMLInputElement>) => {
+    if (evt.currentTarget.value === '') {
+      setValidCount(undefined);
+      return;
+    }
+
     const currentCount = Number(evt.currentTarget.value);
 
     if (currentCount >= ProductInCartCountRange.Min && currentCount <= ProductInCartCountRange.Max) {
@@ -66,7 +71,12 @@ function CartItem({onModalCartDeleteOpenClick, onCurrentProductSelect, product}:
   };
 
   const handleCountInputBlur = () => {
-    dispatch(updateProductCountInCart(id, validCount));
+    if (validCount === undefined) {
+      setValidCount(count);
+      dispatch(updateProductCountInCart(id, count));
+    } else {
+      dispatch(updateProductCountInCart(id, validCount));
+    }
   };
 
   useEffect(() => {
@@ -122,10 +132,9 @@ function CartItem({onModalCartDeleteOpenClick, onCurrentProductSelect, product}:
           onKeyPress={handleOnlyNumberKeyPress}
           onChange={handleCountInputChange}
           onBlur={handleCountInputBlur}
-          value={validCount}
+          value={validCount ?? ''}
           className="quantity__input"
           type="number"
-          placeholder={String(count)}
           id="2-count"
           name="2-count"
           min={ProductInCartCountRange.Min}
